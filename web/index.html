@@ -1,0 +1,220 @@
+﻿<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f4f6f2">
+  <title>Тренировочный дневник</title>
+  
+  <style>
+    :root{color-scheme:light;--bg:#f4f6f2;--paper:#fff;--ink:#24352d;--muted:#718078;--line:#e2e9e2;--accent:#34765b;--accent-soft:#e6f0e9;--warm:#f1eee6;--danger:#a34747;--shadow:0 8px 28px #20382a0c;--safe-bottom:env(safe-area-inset-bottom,0px)}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding:0 0 calc(82px + var(--safe-bottom))}button,input,select{font:inherit}button{cursor:pointer}#app{max-width:620px;margin:0 auto;min-height:100vh}.top{padding:calc(18px + env(safe-area-inset-top,0px)) 20px 14px;background:var(--bg);position:sticky;top:0;z-index:5}.eyebrow{font-size:11px;letter-spacing:.12em;font-weight:750;color:var(--muted)}h1{font-size:25px;line-height:1.15;margin:7px 0 3px;letter-spacing:-.035em}.subhead{color:var(--muted);font-size:13px}.content{padding:4px 16px 24px}.hero{position:relative;overflow:hidden;padding:19px 20px;margin:0 0 15px;background:#e7efe7;border-radius:22px;min-height:112px}.hero:after{content:"";position:absolute;width:112px;height:112px;border-radius:50%;background:#d6e5d8;right:-17px;top:-23px}.hero strong{position:relative;z-index:1;display:block;font-size:18px;max-width:74%;line-height:1.22}.hero span{position:relative;z-index:1;display:block;color:#63756a;font-size:12px;margin-top:8px;max-width:78%}.card{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:17px;margin:0 0 13px;box-shadow:var(--shadow)}.section-title{font-size:15px;font-weight:750;margin:1px 0 14px}.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field{min-width:0;margin:0 0 13px}.field label{display:block;color:var(--muted);font-size:11px;font-weight:700;margin:0 0 6px}.field input,.field select,.text-input{display:block;width:100%;min-width:0;height:44px;border:1px solid var(--line);border-radius:12px;background:#fbfcfa;color:var(--ink);padding:0 12px;outline:none}.field input:focus,.field select:focus,.text-input:focus{border-color:#78a58c;box-shadow:0 0 0 3px #5a9a711b}.segments{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;margin:0 0 13px}.segment{border:1px solid var(--line);background:#f8faf7;color:#64736a;border-radius:11px;min-height:40px;padding:6px 2px;font-size:11px;font-weight:700}.segment.active{background:var(--accent);border-color:var(--accent);color:white}.exercise-line{display:flex;gap:8px;align-items:center}.exercise-line select{flex:1}.icon-add{height:42px;width:44px;border:1px solid var(--line);background:var(--accent-soft);color:var(--accent);border-radius:12px;font-size:22px}.set-head,.set-row{display:grid;grid-template-columns:35px 1fr 1fr 42px;gap:7px;align-items:center}.set-head{color:var(--muted);font-size:10px;font-weight:700;margin:5px 1px 7px}.set-row{margin-bottom:7px}.set-num{font-size:12px;font-weight:750;color:var(--accent);text-align:center}.set-row input{width:100%;min-width:0;height:40px;border:1px solid var(--line);border-radius:10px;padding:0 9px;background:#fbfcfa;color:var(--ink)}.check{height:38px;border:0;border-radius:10px;background:#edf2ec;color:var(--muted);font-size:16px}.check.done{background:#dceddf;color:#34765b}.link-btn{border:0;background:transparent;color:var(--accent);font-size:12px;font-weight:750;padding:8px 2px}.primary{width:100%;height:48px;border:0;border-radius:14px;background:var(--accent);color:#fff;font-weight:750;box-shadow:0 5px 14px #34765b28}.primary:disabled{opacity:.6}.secondary{height:40px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--accent);font-weight:700;padding:0 13px}.hint{font-size:11px;color:var(--muted);margin:-4px 0 12px}.notice{display:none;padding:11px 13px;margin:0 0 12px;border-radius:12px;font-size:13px}.notice.error{display:block;background:#f9e9e7;color:var(--danger)}.notice.success{display:block;background:#e7f2e8;color:#34765b}.hidden{display:none!important}.history-day{margin-bottom:11px}.history-day summary{list-style:none;display:flex;align-items:center;justify-content:space-between;cursor:pointer;padding:15px 16px;font-weight:750}.history-day summary::-webkit-details-marker{display:none}.day-total{font-size:11px;color:var(--muted);font-weight:600}.history-items{padding:0 13px 11px}.workout-item{border-top:1px solid var(--line);padding:12px 3px}.workout-name{font-size:14px;font-weight:750}.workout-meta{color:var(--muted);font-size:11px;margin-top:4px}.set-badges{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px}.badge{border-radius:8px;background:#f0f4ef;color:#52675a;padding:4px 7px;font-size:10px}.metric-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.metric{background:#f7f9f6;border-radius:15px;padding:14px}.metric small{display:block;font-size:10px;letter-spacing:.06em;color:var(--muted);font-weight:750}.metric strong{display:block;font-size:26px;letter-spacing:-.03em;margin-top:4px}.metric span{font-size:11px;color:var(--muted)}.bmi-scale{height:7px;border-radius:9px;background:linear-gradient(90deg,#8fb5d1 0 27%,#82b78b 27% 55%,#e3bb70 55% 75%,#cf8580 75%);margin:14px 0 7px;position:relative}.bmi-marker{position:absolute;width:13px;height:13px;border:3px solid #fff;background:var(--ink);border-radius:50%;top:-3px;left:0;box-shadow:0 1px 5px #0004}.empty{padding:24px 12px;text-align:center;color:var(--muted);font-size:13px}.bottom-nav{position:fixed;z-index:10;bottom:0;left:0;right:0;background:#ffffffed;backdrop-filter:blur(18px);border-top:1px solid var(--line);padding:8px 12px calc(8px + var(--safe-bottom));display:flex;justify-content:center}.nav-inner{width:100%;max-width:620px;display:grid;grid-template-columns:repeat(3,1fr);gap:5px}.tab{border:0;background:transparent;color:#819087;border-radius:12px;min-height:48px;font-size:11px;font-weight:700}.tab span{display:block;font-size:18px;line-height:1.1;margin-bottom:2px}.tab.active{background:var(--accent-soft);color:var(--accent)}.profile-card{display:flex;gap:12px;align-items:center}.avatar{width:45px;height:45px;border-radius:15px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;font-size:20px;font-weight:800}.help{color:var(--muted);font-size:12px;line-height:1.5}.loader{padding:45px 20px;text-align:center;color:var(--muted)}
+    @media(min-width:560px){.content{padding-left:22px;padding-right:22px}.top{padding-left:26px;padding-right:26px}.card{padding:20px}.segments{gap:8px}.segment{font-size:12px}}
+  </style>
+<style>
+.history-actions{display:flex;gap:8px;margin-top:12px}.history-actions button,.modal-actions button,.sets-editor-head button{min-height:38px;padding:0 14px;border:0;border-radius:12px;font:inherit;font-weight:600}.history-actions .secondary,.modal-actions .secondary,.sets-editor-head .secondary{background:#e9efeb;color:#385b48}.danger{background:#f8e5e5;color:#a33d3d}.edit-overlay{position:fixed;inset:0;z-index:1000;background:#14221eb8;display:flex;align-items:center;justify-content:center;padding:14px}.edit-modal{background:var(--surface,#fff);color:var(--text,#23332b);width:min(100%,480px);max-height:92vh;overflow:auto;border-radius:22px;padding:20px;box-shadow:0 18px 60px #0003}.edit-modal h2{font-size:20px;margin:0}.modal-heading,.modal-actions,.sets-editor-head{display:flex;align-items:center;justify-content:space-between;gap:10px}.edit-modal label{display:block;font-size:13px;font-weight:600;margin-top:12px}.edit-modal input,.edit-modal select{box-sizing:border-box;width:100%;height:42px;margin-top:5px;border:1px solid #dce5df;border-radius:11px;padding:0 11px;background:var(--surface,#fff);color:inherit;font:inherit}.edit-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.icon-btn{width:38px;height:38px;border:0;border-radius:11px;background:#edf1ee;color:#375846;font-size:22px}.sets-editor{margin-top:14px}.edit-set{display:grid;grid-template-columns:25px 1fr 1fr 38px;gap:7px;align-items:center;margin-top:8px}.edit-set input{margin:0}.edit-set span{text-align:center}.edit-error{color:#a33d3d;font-size:13px;min-height:18px}.modal-actions{justify-content:flex-end;margin-top:14px}.modal-actions .primary{min-height:40px;padding:0 18px}.edit-modal p{line-height:1.45}
+.session-summary{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}.session-summary strong{display:block;font-size:17px}.session-summary small{display:block;color:var(--muted);margin-top:5px}.session-summary .secondary{flex:none}.session-actions{display:flex;gap:8px;margin-top:14px}.session-actions .primary{flex:1}.session-actions .secondary{height:48px}.current-list{margin-top:12px}.current-list .workout-item:first-child{border-top:0}.session-start-card .primary{margin-top:4px}.history-session{padding:10px 2px 14px;border-top:1px solid var(--line)}.history-session:first-child{border-top:0}.history-session-head{display:flex;align-items:center;justify-content:space-between;gap:8px;color:var(--muted);font-size:11px}.history-session-head .link-btn{white-space:nowrap}.history-session .workout-item:first-of-type{border-top:0}
+.weight-chart{width:100%;height:auto;display:block;margin-top:12px}.weight-chart-labels{display:flex;justify-content:space-between;color:var(--muted);font-size:11px;margin:2px 4px 0}.weight-trend{font-size:12px;color:var(--muted);margin:-4px 0 0}.weight-trend strong{color:var(--accent)}.field input[readonly]{background:var(--accent-soft);color:var(--ink)}
+</style>
+</head>
+<body>
+<div id="app">
+  <header class="top"><div class="eyebrow">ЛИЧНЫЙ ДНЕВНИК</div><h1 id="title">Тренировка</h1><div class="subhead" id="subtitle">Сохраняй занятия и следи за прогрессом</div></header>
+  <main class="content" id="screen"><div class="loader">Загружаю дневник…</div></main>
+  <nav class="bottom-nav"><div class="nav-inner">
+    <button class="tab active" data-tab="record"><span>＋</span>Запись</button>
+    <button class="tab" data-tab="history"><span>▤</span>История</button>
+    <button class="tab" data-tab="profile"><span>◉</span>Профиль</button>
+  </div></nav>
+</div>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script>
+(() => {
+  const tg = window.Telegram?.WebApp;
+  if (tg) { tg.ready(); tg.expand(); }
+  const localDate = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+  const state = {meta:null, data:null, tab:"record", category:"Грудь", cardio:false, sets:[], selectedExercise:""};
+  const $ = (selector, root=document) => root.querySelector(selector);
+  const screen = $("#screen");
+  const localDev = false;
+  const fmtTime = d => `${String(d.getHours()).padStart(2,"0")}:${String(d.getMinutes()).padStart(2,"0")}`;
+  function headers(json=false) {
+    const h = {};
+    if (json) h["Content-Type"] = "application/json";
+    if (tg?.initData) h["X-Telegram-Init-Data"] = tg.initData;
+    else if (localDev && state.meta?.dev_mode) h["X-Dev-User-Id"] = "1";
+    return h;
+  }
+  async function api(path, options={}) {
+    const request = {...options, headers: {...headers(Boolean(options.body)), ...(options.headers || {})}};
+    const result = await fetch(path, request);
+    let response;
+    try { response = await result.json(); }
+    catch (_) { throw new Error(`Сервер вернул некорректный ответ (${result.status}).`); }
+    if (!result.ok) throw new Error(response.error || "Не удалось выполнить запрос.");
+    return response;
+  }  const esc = value => String(value ?? "").replace(/[&<>"']/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[ch]));
+  function renderSessionStart(){
+    const profile=state.data.profile||{};
+    $("#title").textContent="Запись";$("#subtitle").textContent="Начни занятие и добавляй упражнения по ходу";
+    screen.innerHTML=`<div id="message" class="notice"></div><div class="card session-start-card"><div class="section-title">Начать новую тренировку</div>
+      <div class="field"><label>Дата тренировки</label><input type="date" id="workout_date" value="${localDate(new Date())}" required></div>
+      <div class="field"><label>Время начала</label><input type="time" id="session_start" value="${fmtTime(new Date())}" required></div>
+      <div class="field"><label>Вес тела · кг</label><input type="number" id="body_weight" inputmode="decimal" min="0.1" max="1000" step="0.1" value="${esc(profile.body_weight||"")}" placeholder="Например, 78" required></div>
+      <button class="primary" id="startSession">Начать тренировку</button></div>`;
+    $("#startSession").onclick=async()=>{const button=$("#startSession");try{
+      if(!$("#workout_date").value||!$("#session_start").value||!$("#body_weight").value)throw new Error("Укажи дату, время начала и вес тела.");
+      button.disabled=true;const result=await api("/api/sessions",{method:"POST",body:JSON.stringify({date:$("#workout_date").value,session_start:$("#session_start").value,body_weight:$("#body_weight").value})});
+      state.data.active_session=result.session;renderRecord();
+    }catch(e){showMessage(e.message,true);button.disabled=false;}};
+  }
+  function sessionSummary(){const s=state.data.active_session;
+    const day=new Date(s.date+"T12:00:00").toLocaleDateString("ru-RU",{day:"numeric",month:"long"});
+    return `<div class="card"><div class="session-summary"><div><div class="eyebrow">ТЕКУЩАЯ ТРЕНИРОВКА</div><strong>${esc(day)}</strong><small>Начало ${esc(s.session_start)} · вес тела ${esc(s.body_weight)} кг</small></div><button class="secondary" id="editSession">Изменить</button></div></div>`;
+  }
+  function renderRecord() {
+    if(!state.data.active_session){renderSessionStart();return;}
+    $("#title").textContent="Текущая тренировка";
+    $("#subtitle").textContent="Добавляй упражнения, затем укажи время окончания";
+    const categories=["Грудь","Ноги","Спина","Другое","Кардио"];
+    const current=state.data.history.filter(item=>item.session_id===state.data.active_session.id);
+    screen.innerHTML=`<div id="message" class="notice"></div>${sessionSummary()}
+      <div class="card"><div class="section-title">Упражнение</div>
+        <div class="segments">${categories.map(c=>`<button class="segment ${((c==="Кардио")===state.cardio && (state.cardio||c===state.category))?"active":""}" data-category="${esc(c)}">${esc(c)}</button>`).join("")}</div>
+        <div class="field"><label>${state.cardio?"Кардиоупражнение":"Выбери движение"}</label><div class="exercise-line"><select id="exercise" required>${(state.data.exercises[state.cardio?"Кардио":state.category]||[]).map(x=>`<option>${esc(x)}</option>`).join("")}</select><button class="icon-add" id="addExercise" title="Добавить своё упражнение">＋</button></div></div>
+        ${state.cardio?`<div class="row"><div class="field"><label>Длительность · мин</label><input type="number" id="duration" inputmode="decimal" min="1" step="1" placeholder="35" required></div><div class="field"><label>Дистанция · км</label><input type="number" id="distance" inputmode="decimal" min="0" step="0.01" placeholder="Необязательно"></div></div><button class="primary" id="save">Добавить кардио</button>`:`<div class="set-head"><span>№</span><span>Вес · кг</span><span>Повторы</span><span></span></div><div id="setList"></div><button class="link-btn" id="addSet">＋ Добавить подход</button><button class="primary" id="save">Добавить упражнение</button>`}
+      </div><div class="card"><div class="section-title">Добавлено в эту тренировку</div><div class="current-list">${current.length?current.map(historyCard).join(""):'<div class="help">Пока нет упражнений.</div>'}</div><div class="session-actions"><button class="primary" id="finishSession">Завершить тренировку</button></div></div>`;
+    $("#editSession").onclick=()=>openSessionEditor(false);
+    $("#finishSession").onclick=()=>openSessionEditor(true);
+    screen.querySelectorAll("[data-edit]").forEach(btn=>btn.onclick=()=>openWorkoutEditor(state.data.history.find(x=>x.id===Number(btn.dataset.edit))));
+    screen.querySelectorAll("[data-delete]").forEach(btn=>btn.onclick=()=>deleteWorkout(Number(btn.dataset.delete)));
+    const exercise=$("#exercise");
+    if (state.cardio) exercise.value=state.data.exercises.Кардио?.[0]||"";
+    else if (state.selectedExercise && (state.data.exercises[state.category]||[]).includes(state.selectedExercise)) exercise.value=state.selectedExercise;
+    screen.querySelectorAll("[data-category]").forEach(btn=>btn.onclick=()=>{
+      const category=btn.dataset.category;
+      if(category==="Кардио"){state.cardio=true;state.selectedExercise="";}
+      else {state.cardio=false;state.category=category;state.selectedExercise="";}
+      renderRecord();
+    });
+    exercise.onchange=()=>state.selectedExercise=exercise.value;
+    $("#addExercise").onclick=async()=>{
+      const name=prompt("Название упражнения"); if(!name?.trim()) return;
+      try{const result=await api("/api/exercises",{method:"POST",body:JSON.stringify({category:state.cardio?"Кардио":state.category,name:name.trim()})});
+        state.data.exercises[result.category]=[...(state.data.exercises[result.category]||[]),name.trim()];state.selectedExercise=name.trim();renderRecord();}
+      catch(e){showMessage(e.message,true);}
+    };
+    if(!state.cardio){state.sets=state.sets.length?state.sets:[{weight:"",reps:"",completed:false},{weight:"",reps:"",completed:false},{weight:"",reps:"",completed:false}];renderSets();$("#addSet").onclick=()=>{if(state.sets.length>=100)return showMessage("Максимум 100 подходов.",true);state.sets.push({weight:"",reps:"",completed:false});renderSets();};}
+    $("#save").onclick=saveWorkout;
+  }
+  function renderSets(){
+    const list=$("#setList");if(!list)return;
+    list.innerHTML=state.sets.map((set,i)=>`<div class="set-row"><span class="set-num">${String(i+1).padStart(2,"0")}</span><input aria-label="Вес подхода ${i+1}" data-weight="${i}" type="number" inputmode="decimal" min="0" max="10000" step="0.1" value="${esc(set.weight)}" placeholder="кг"><input aria-label="Повторы подхода ${i+1}" data-reps="${i}" type="number" inputmode="numeric" min="1" max="10000" step="1" value="${esc(set.reps)}" placeholder="раз"><button class="check ${set.completed?"done":""}" data-check="${i}">${set.completed?"✓":"○"}</button></div>`).join("");
+    list.querySelectorAll("[data-weight]").forEach(el=>el.oninput=()=>state.sets[Number(el.dataset.weight)].weight=el.value);
+    list.querySelectorAll("[data-reps]").forEach(el=>el.oninput=()=>state.sets[Number(el.dataset.reps)].reps=el.value);
+    list.querySelectorAll("[data-check]").forEach(el=>el.onclick=()=>{const i=Number(el.dataset.check);state.sets[i].completed=!state.sets[i].completed;renderSets();});
+  }
+  function showMessage(text,error=false){const el=$("#message");if(!el)return;el.className=`notice ${error?"error":"success"}`;el.textContent=text;}
+  async function saveWorkout(){
+    const button=$("#save");
+    try{
+      const common={session_id:state.data.active_session.id,exercise:$("#exercise").value,category:state.cardio?"Кардио":state.category};
+      if(state.cardio){common.duration_minutes=$("#duration").value;common.distance_km=$("#distance").value;}
+      else {common.sets=state.sets.map(s=>({weight:s.weight,reps:s.reps,completed:s.completed}));}
+      button.disabled=true;await api("/api/workouts",{method:"POST",body:JSON.stringify(common)});
+      state.sets=[];state.data=await api("/api/bootstrap");renderRecord();showMessage("Упражнение добавлено в тренировку.");
+      if(tg?.HapticFeedback)tg.HapticFeedback.notificationOccurred("success");
+    }catch(e){showMessage(e.message,true);if(button)button.disabled=false;}
+  }
+  function openSessionEditor(finishing, target=null){
+    const s=target||state.data.active_session;if(!s)return;
+    const layer=document.createElement("div");layer.className="edit-overlay";
+    layer.innerHTML=`<form class="edit-modal"><div class="modal-heading"><h2>${finishing?"Завершить тренировку":"Параметры тренировки"}</h2><button type="button" class="icon-btn" data-close>×</button></div>
+      ${finishing?`<p class="help">Время окончания сохранится для всех упражнений этой тренировки.</p>`:`<label>Дата<input name="date" type="date" required value="${esc(s.date)}"></label><label>Время начала<input name="session_start" type="time" required value="${esc(s.session_start)}"></label>${s.session_end?`<label>Время окончания<input name="session_end" type="time" required value="${esc(s.session_end)}"></label>`:""}<label>Вес тела, кг<input name="body_weight" type="number" min="0.1" max="1000" step="0.1" required value="${esc(s.body_weight)}"></label>`}
+      ${finishing?`<label>Время окончания<input name="session_end" type="time" required value="${fmtTime(new Date())}"></label>`:""}
+      <p class="edit-error" data-error></p><div class="modal-actions"><button type="button" class="secondary" data-close>Отмена</button><button class="primary">${finishing?"Завершить":"Сохранить"}</button></div></form>`;
+    document.body.append(layer);layer.querySelectorAll("[data-close]").forEach(x=>x.onclick=()=>layer.remove());layer.onclick=e=>{if(e.target===layer)layer.remove();};
+    layer.querySelector("form").onsubmit=async e=>{e.preventDefault();const form=e.currentTarget, f=new FormData(form);
+      const payload={date:finishing?s.date:f.get("date"),session_start:finishing?s.session_start:f.get("session_start"),body_weight:finishing?s.body_weight:f.get("body_weight"),session_end:finishing?f.get("session_end"):(s.session_end?f.get("session_end"):"")};
+      const button=form.querySelector(".primary");button.disabled=true;
+      try{await api(`/api/sessions/${s.id}`,{method:"PUT",body:JSON.stringify(payload)});state.data=await api("/api/bootstrap");layer.remove();render();if(finishing)showMessage("Тренировка завершена. Записи доступны в истории.");}
+      catch(err){form.querySelector("[data-error]").textContent=err.message;button.disabled=false;}
+    };
+  }
+  function renderHistory(){
+    $("#title").textContent="История";$("#subtitle").textContent="Выбери день и редактируй записи тренировок";
+    const groups={};for(const item of state.data.history){(groups[item.date]??=[]).push(item);}
+    const days=Object.keys(groups).sort().reverse();
+    if(!days.length){screen.innerHTML='<div class="card empty">Здесь появятся тренировки после первой записи.</div>';return;}
+    screen.innerHTML=days.map((day,index)=>`<details class="card history-day" ${index===0?"open":""}><summary>${new Date(day+"T12:00:00").toLocaleDateString("ru-RU",{weekday:"short",day:"numeric",month:"long"})}<span class="day-total">${groups[day].length} ${plural(groups[day].length,["запись","записи","записей"])}</span></summary><div class="history-items">${historyDayContent(groups[day])}</div></details>`).join("");
+    screen.querySelectorAll("[data-session-edit]").forEach(btn=>btn.onclick=()=>openSessionEditor(false,(state.data.sessions||[]).find(s=>s.id===Number(btn.dataset.sessionEdit))));
+    screen.querySelectorAll("[data-edit]").forEach(btn=>btn.onclick=()=>openWorkoutEditor(state.data.history.find(x=>x.id===Number(btn.dataset.edit))));
+    screen.querySelectorAll("[data-delete]").forEach(btn=>btn.onclick=()=>deleteWorkout(Number(btn.dataset.delete)));
+  }
+  function historyDayContent(items){
+    const ids=[...new Set(items.map(item=>item.session_id).filter(Boolean))];
+    const sessions=ids.map(id=>(state.data.sessions||[]).find(s=>s.id===id)).filter(Boolean);
+    return sessions.map(s=>`<div class="history-session"><div class="history-session-head"><span>${esc(s.session_start)}–${esc(s.session_end||"идёт")} · вес тела ${esc(s.body_weight)} кг</span><button class="link-btn" data-session-edit="${s.id}">Изменить время и вес</button></div>${items.filter(item=>item.session_id===s.id).map(historyCard).join("")}</div>`).join("")+items.filter(item=>!item.session_id||!sessions.some(s=>s.id===item.session_id)).map(historyCard).join("");
+  }
+  function historyCard(item){
+    const isCardio=item.exercise.startsWith("Кардио:");
+    const badges=isCardio?`<span class="badge">${esc(item.duration_minutes??"—")} мин</span>${item.distance_km!=null?`<span class="badge">${esc(item.distance_km)} км</span>`:""}`:(item.sets||[]).map((s,i)=>`<span class="badge">${i+1}: ${esc(s.weight)} кг × ${esc(s.reps)}</span>`).join("");
+    return `<article class="workout-item"><div class="workout-name">${esc(item.exercise)}</div>${badges?`<div class="set-badges">${badges}</div>`:""}<div class="history-actions"><button class="secondary" data-edit="${item.id}">Изменить</button><button class="danger" data-delete="${item.id}">Удалить</button></div></article>`;
+  }
+  function openWorkoutEditor(item){
+    if(!item)return;
+    const isCardio=item.exercise.startsWith("Кардио:"), prefix=isCardio?"Кардио":(item.exercise.split(":")[0]||"Грудь"), exercise=item.exercise.includes(":")?item.exercise.slice(item.exercise.indexOf(":")+1).trim():item.exercise;
+    const sets=(item.sets?.length?item.sets:[{weight:0,reps:1,completed:false}]).map(s=>({...s}));
+    const layer=document.createElement("div");layer.className="edit-overlay";
+    layer.innerHTML=`<form class="edit-modal"><div class="modal-heading"><h2>Изменить запись</h2><button type="button" class="icon-btn" data-close>×</button></div>${item.session_id?'<p class="help">Дата, время и вес тела общие для всей тренировки.</p>':`<label>Дата<input name="date" type="date" required value="${esc(item.date)}"></label>`}<label>Раздел<select name="category">${["Грудь","Ноги","Спина","Другое","Кардио"].map(x=>`<option ${x===prefix?"selected":""}>${x}</option>`).join("")}</select></label><label>Упражнение<input name="exercise" maxlength="80" required value="${esc(exercise)}"></label>${item.session_id?"":`<label>Вес тела, кг<input name="body_weight" type="number" min="0.1" max="1000" step="0.1" required value="${esc(item.body_weight??"")}"></label><div class="edit-row"><label>Начало<input name="session_start" type="time" required value="${esc(item.session_start||"")}"></label><label>Окончание<input name="session_end" type="time" value="${esc(item.session_end||"")}"></label></div>`}<div data-fields></div><p class="edit-error" data-error></p><div class="modal-actions"><button type="button" class="secondary" data-close>Отмена</button><button class="primary">Сохранить</button></div></form>`;
+    document.body.append(layer);
+    const form=layer.querySelector("form"), fields=form.querySelector("[data-fields]");
+    function drawFields(){const cardio=form.elements.category.value==="Кардио";fields.innerHTML=cardio?`<div class="edit-row"><label>Длительность, мин<input name="duration_minutes" type="number" min="1" max="10000" step="1" required value="${esc(item.duration_minutes??"")}"></label><label>Дистанция, км<input name="distance_km" type="number" min="0" max="10000" step="0.1" value="${esc(item.distance_km??"")}"></label></div>`:`<div class="sets-editor"><div class="sets-editor-head"><b>Подходы</b><button type="button" class="secondary" data-add>+ Подход</button></div><div data-rows></div></div>`;if(!cardio)drawRows();}
+    function drawRows(){const rows=fields.querySelector("[data-rows]");if(!rows)return;rows.innerHTML=sets.map((s,i)=>`<div class="edit-set"><span>${i+1}</span><input type="number" min="0" max="10000" step="0.1" data-w="${i}" value="${esc(s.weight)}" placeholder="кг"><input type="number" min="1" max="10000" step="1" data-r="${i}" value="${esc(s.reps)}" placeholder="повторы"><button type="button" class="icon-btn" data-remove="${i}">×</button></div>`).join("");rows.querySelectorAll("[data-w]").forEach(x=>x.oninput=()=>sets[+x.dataset.w].weight=x.value);rows.querySelectorAll("[data-r]").forEach(x=>x.oninput=()=>sets[+x.dataset.r].reps=x.value);rows.querySelectorAll("[data-remove]").forEach(x=>x.onclick=()=>{if(sets.length>1){sets.splice(+x.dataset.remove,1);drawRows();}});fields.querySelector("[data-add]").onclick=()=>{if(sets.length<100){sets.push({weight:"",reps:"",completed:false});drawRows();}};}
+    form.elements.category.onchange=drawFields;drawFields();layer.querySelectorAll("[data-close]").forEach(x=>x.onclick=()=>layer.remove());layer.onclick=e=>{if(e.target===layer)layer.remove();};
+    form.onsubmit=async e=>{e.preventDefault();const f=new FormData(form),category=f.get("category"),payload={date:item.session_id?item.date:f.get("date"),category,exercise:f.get("exercise").trim(),body_weight:item.session_id?item.body_weight:f.get("body_weight"),session_start:item.session_id?item.session_start:f.get("session_start"),session_end:item.session_id?(item.session_end||""):f.get("session_end")};if(category==="Кардио"){payload.duration_minutes=f.get("duration_minutes");payload.distance_km=f.get("distance_km");}else payload.sets=sets.map(s=>({weight:s.weight,reps:s.reps,completed:s.completed}));try{await api(`/api/workouts/${item.id}`,{method:"PUT",body:JSON.stringify(payload)});state.data=await api("/api/bootstrap");layer.remove();render();}catch(err){form.querySelector("[data-error]").textContent=err.message;}};
+  }
+  async function deleteWorkout(id){const item=state.data.history.find(x=>x.id===id);if(!item)return;const layer=document.createElement("div");layer.className="edit-overlay";layer.innerHTML=`<div class="edit-modal"><h2>Удалить упражнение?</h2><p>${esc(item.exercise)} · ${esc(item.date)}</p><p class="help">Запись и все её подходы будут удалены.</p><div class="modal-actions"><button class="secondary" data-cancel>Отмена</button><button class="danger" data-confirm>Удалить</button></div></div>`;document.body.append(layer);layer.querySelector("[data-cancel]").onclick=()=>layer.remove();layer.onclick=e=>{if(e.target===layer)layer.remove();};layer.querySelector("[data-confirm]").onclick=async e=>{const b=e.currentTarget;b.disabled=true;try{await api(`/api/workouts/${id}`,{method:"DELETE"});state.data=await api("/api/bootstrap");layer.remove();render();}catch(err){layer.querySelector(".help").textContent=err.message;b.disabled=false;}};}
+  function plural(n,forms){const m=n%10,d=n%100;return forms[m===1&&d!==11?0:m>=2&&m<=4&&(d<12||d>14)?1:2];}
+  function renderWeightChart(){
+    const readings=(state.data.weight_history||[]).slice(-12);
+    if(!readings.length)return `<div class="card"><div class="section-title">Динамика веса</div><p class="help">После первой тренировки здесь появится график веса.</p></div>`;
+    const values=readings.map(item=>Number(item.weight)), min=Math.min(...values), max=Math.max(...values);
+    const spread=Math.max(max-min,1), low=min-spread*.25, high=max+spread*.25;
+    const x=i=>readings.length===1?180:36+i*290/(readings.length-1);
+    const y=value=>120-(value-low)*96/(high-low);
+    const points=readings.map((item,i)=>`${x(i).toFixed(1)},${y(values[i]).toFixed(1)}`).join(" ");
+    const dots=readings.map((item,i)=>`<circle cx="${x(i).toFixed(1)}" cy="${y(values[i]).toFixed(1)}" r="4.5" fill="var(--accent)" stroke="var(--paper)" stroke-width="2"><title>${esc(new Date(item.date+"T12:00:00").toLocaleDateString("ru-RU"))}: ${esc(item.weight)} кг</title></circle>`).join("");
+    const delta=values[values.length-1]-values[0], days=`${readings.length} ${plural(readings.length,["тренировочный день","тренировочных дня","тренировочных дней"])}`;
+    const change=readings.length>1?`Изменение за ${days}: <strong>${delta>0?"+":delta<0?"−":""}${Math.abs(delta).toLocaleString("ru-RU",{maximumFractionDigits:1})} кг</strong>`:"Первая отметка веса";
+    const dateLabel=day=>new Date(day+"T12:00:00").toLocaleDateString("ru-RU",{day:"numeric",month:"short"});
+    return `<div class="card"><div class="section-title">Динамика веса</div><p class="weight-trend">${change}</p><svg class="weight-chart" viewBox="0 0 340 140" role="img" aria-label="График веса по тренировочным дням"><line x1="36" y1="24" x2="326" y2="24" stroke="var(--line)"/><line x1="36" y1="120" x2="326" y2="120" stroke="var(--line)"/><text x="1" y="28" fill="var(--muted)" font-size="10">${max.toFixed(1)}</text><text x="1" y="124" fill="var(--muted)" font-size="10">${min.toFixed(1)}</text>${readings.length>1?`<polyline points="${points}" fill="none" stroke="var(--accent)" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>`:""}${dots}</svg><div class="weight-chart-labels"><span>${dateLabel(readings[0].date)}</span><span>${readings.length>1?dateLabel(readings[readings.length-1].date):""}</span></div><p class="help">На графике последние ${days}; одна отметка на день.</p></div>`;
+  }
+  function renderProfile(){
+    const profile=state.data.profile||{};const weight=Number(profile.body_weight||0),height=Number(profile.height||0),bmi=weight&&height?weight/(height/100)**2:null;
+    const caption=!bmi?"Укажи рост и вес в профиле":bmi<18.5?"Ниже стандартного диапазона":bmi<25?"Стандартный диапазон":bmi<30?"Выше стандартного диапазона":"Значительно выше стандартного диапазона";
+    const marker=bmi?Math.min(98,Math.max(2,(bmi/40)*100)):0;
+    $("#title").textContent="Профиль";$("#subtitle").textContent="Личные данные и текущий показатель ИМТ";
+    screen.innerHTML=`<div class="card profile-card"><div class="avatar">${esc((profile.name||"Т").slice(0,1).toUpperCase())}</div><div><div class="workout-name">${esc(profile.name||"Заполни профиль")}</div><div class="workout-meta">${esc(profile.gender||"Пол не выбран")}</div></div></div>
+      <div class="card"><div class="section-title">Текущий ИМТ</div><div class="metric-grid"><div class="metric"><small>ИНДЕКС</small><strong>${bmi?bmi.toFixed(1):"—"}</strong><span>${caption}</span></div><div class="metric"><small>ВЕС / РОСТ</small><strong>${weight||"—"}<span> кг</span></strong><span>${height||"—"} см</span></div></div><div class="bmi-scale"><i class="bmi-marker" style="left:calc(${marker}% - 6px)"></i></div><p class="help">ИМТ — ориентировочный показатель для взрослых: меньше 18,5 — ниже стандартного диапазона, 18,5–24,9 — стандартный, 25–29,9 — повышенный, 30 и выше — высокий. Это не диагноз: ИМТ не различает мышечную и жировую массу и может завышать оценку у людей с большой мышечной массой.</p><button class="link-btn" id="moreBmi">Подробнее об ИМТ</button></div>
+       ${renderWeightChart()}
+       <div class="card"><div class="section-title">Мои данные</div><div class="field"><label>Имя</label><input id="profile_name" maxlength="60" value="${esc(profile.name||"")}" placeholder="Имя" required></div><div class="field"><label>Пол</label><select id="profile_gender"><option value="">Выбери</option>${["Мужской","Женский","Другой"].map(x=>`<option ${profile.gender===x?"selected":""}>${x}</option>`).join("")}</select></div><div class="row"><div class="field"><label>Вес · кг ${state.data.weight_history?.length?"· из последней тренировки":""}</label><input id="profile_weight" type="number" inputmode="decimal" min="0.1" max="1000" step="0.1" value="${esc(profile.body_weight||"")}" ${state.data.weight_history?.length?"readonly":""} required></div><div class="field"><label>Рост · см</label><input id="profile_height" type="number" inputmode="decimal" min="80" max="250" step="0.1" value="${esc(profile.height||"")}" required></div></div>${state.data.weight_history?.length?'<p class="hint">Вес меняется в записи тренировки.</p>':""}<div id="message" class="notice"></div><button class="primary" id="saveProfile">Сохранить профиль</button></div>
+      <p class="help" style="padding:0 5px">Статистика использует те же записи, что и приложение на компьютере.</p>`;
+    $("#moreBmi").onclick=()=>alert("ИМТ = вес в килограммах / (рост в метрах)². Для взрослых: ниже 18,5 — недостаточная масса; 18,5–24,9 — стандартный диапазон; 25–29,9 — повышенный; 30 и выше — высокий. ИМТ не учитывает состав тела и сам по себе не является медицинским диагнозом.");
+    $("#saveProfile").onclick=async()=>{try{const data={name:$("#profile_name").value,gender:$("#profile_gender").value,body_weight:$("#profile_weight").value,height:$("#profile_height").value};const result=await api("/api/profile",{method:"POST",body:JSON.stringify(data)});state.data.profile=result.profile;renderProfile();}catch(e){showMessage(e.message,true);}};
+  }
+  function render(){document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("active",b.dataset.tab===state.tab));if(state.tab==="record")renderRecord();else if(state.tab==="history")renderHistory();else renderProfile();}
+  document.querySelectorAll(".tab").forEach(b=>b.onclick=async()=>{state.tab=b.dataset.tab;if(state.tab==="history"||state.tab==="profile")try{state.data=await api("/api/bootstrap");}catch(e){screen.innerHTML=`<div class="card empty">${esc(e.message)}</div>`;return;}render();});
+  async function start(){
+    try{state.meta=await api("/api/meta");if(!state.meta.configured)throw new Error("Сервер Mini App пока не настроен.");
+      state.data=await api("/api/bootstrap");
+      if(!state.data.profile?.name)state.tab="profile";
+      render();
+    }catch(error){screen.innerHTML=`<div class="card"><div class="section-title">Не удалось открыть дневник</div><div class="help">${esc(error.message)}${!tg&&!localDev?" Открой приложение через Telegram.":""}</div></div>`;}
+  }
+  start();
+})();
+</script>
+</body>
+</html>
+
