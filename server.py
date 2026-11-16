@@ -16,6 +16,7 @@ import uuid
 import shutil
 import tempfile
 import zipfile
+from contextlib import closing
 from contextvars import ContextVar
 from datetime import date, datetime
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -882,7 +883,7 @@ def create_backup_archive():
                 target = snapshot_root / relative
                 target.parent.mkdir(parents=True, exist_ok=True)
                 if source.suffix in (".sqlite3", ".sqlite", ".db"):
-                    with sqlite3.connect(source) as source_db, sqlite3.connect(target) as target_db:
+                    with closing(sqlite3.connect(source)) as source_db, closing(sqlite3.connect(target)) as target_db:
                         source_db.backup(target_db)
                 else:
                     shutil.copy2(source, target)
