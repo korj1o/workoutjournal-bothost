@@ -382,7 +382,7 @@ def save_program(payload, program_id=None):
             sets = int(item.get("sets", 3))
         except (TypeError, ValueError):
             raise ValueError("Количество подходов должно быть от 1 до 100.")
-        if category not in CATEGORIES or category == OTHER_CATEGORY or exercise not in allowed_exercises(category):
+        if category not in CATEGORIES or exercise not in allowed_exercises(category):
             raise ValueError("Выбери упражнение из списка доступных.")
         if not 1 <= sets <= 100:
             raise ValueError("Количество подходов должно быть от 1 до 100.")

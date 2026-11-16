@@ -233,7 +233,7 @@
     screen.querySelectorAll("[data-start-program]").forEach(button=>button.onclick=()=>{state.newProgramId=String(button.dataset.startProgram);state.tab="record";render();window.scrollTo({top:0,behavior:"smooth"});});
   }
   function openProgramEditor(program=null){
-    const categories=["Грудь","Ноги","Спина","Кардио"];
+    const categories=["Грудь","Ноги","Спина","Другое","Кардио"];
     const draft=(program?.exercises||[]).map(x=>({...x}));
     const layer=document.createElement("div");layer.className="edit-overlay";
     layer.innerHTML=`<form class="edit-modal"><div class="modal-heading"><h2>${program?"Изменить программу":"Новая программа"}</h2><button type="button" class="icon-btn" data-close>×</button></div><label>Название программы<input name="name" maxlength="80" required value="${esc(program?.name||"")}" placeholder="Например, Верх тела"></label><label>Группа мышц / вид<select name="category">${categories.map(x=>`<option>${x}</option>`).join("")}</select></label><label>Упражнение<select name="exercise"></select></label><div class="row"><label>Подходы<input name="sets" type="number" min="1" max="100" value="3"></label><button type="button" class="secondary" data-add style="align-self:end;margin-bottom:12px">Добавить упражнение</button></div><div data-list></div><div class="edit-error" data-error></div><div class="modal-actions"><button type="button" class="secondary" data-cancel>Отмена</button><button class="primary" type="submit" style="width:auto">Сохранить</button></div></form>`;
