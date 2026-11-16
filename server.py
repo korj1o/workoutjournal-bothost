@@ -261,8 +261,22 @@ def set_profile(payload):
         raise ValueError("����� ��� � ���� �������.")
     if not name or not 0 < weight <= 1000 or not 80 <= height <= 250:
         raise ValueError("��� �����������; ��� ������ ���� �� 1000 ��, ���� � �� 80 �� 250 ��.")
+    measurements = {}
+    for key in ("chest", "waist", "biceps", "thigh"):
+        raw = payload.get(key, "")
+        if raw in (None, ""):
+            measurements[key] = None
+            continue
+        try:
+            value = float(raw)
+        except (TypeError, ValueError):
+            raise ValueError("Значения измерений должны быть числами.")
+        if not 1 <= value <= 300:
+            raise ValueError("Измерения должны быть от 1 до 300 см.")
+        measurements[key] = value
     config = load_config()
-    config["profile"] = {"name": name, "gender": gender, "body_weight": weight, "height": height}
+    config["profile"] = {"name": name, "gender": gender, "body_weight": weight, "height": height,
+                          "measurements": measurements}
     save_config(config)
     return config["profile"]
 
@@ -534,11 +548,8 @@ def delete_workout(workout_id):
 
 
 def update_profile_weight(weight):
-    config = load_config()
-    if config.get("profile"):
-        weights = get_weight_history()
-        config["profile"]["body_weight"] = weights[-1]["weight"] if weights else weight
-        save_config(config)
+    # The profile weight is editable independently from a training entry.
+    return
 
 
 def get_history():
@@ -557,6 +568,65 @@ def get_history():
                         "body_weight": body, "duration_minutes": minutes, "distance_km": distance,
                          "session_start": start, "session_end": end, "session_id": session_id})
     return entries
+
+
+def get_records():
+    records = {}
+    for item in get_history():
+        if item["exercise"].startswith("Кардио:"):
+            continue
+        name = item["exercise"]
+        sets = item.get("sets", [])
+        if not sets:
+            continue
+        max_weight = max((float(s["weight"]) for s in sets), default=0)
+        max_reps = max((int(s["reps"]) for s in sets), default=0)
+        volume = sum(float(s["weight"]) * int(s["reps"]) for s in sets)
+        current = records.setdefault(name, {"exercise": name, "max_weight": 0, "max_reps": 0,
+                                             "max_volume": 0, "weight_date": None,
+                                             "reps_date": None, "volume_date": None})
+        if max_weight > current["max_weight"]:
+            current["max_weight"], current["weight_date"] = max_weight, item["date"]
+        if max_reps > current["max_reps"]:
+            current["max_reps"], current["reps_date"] = max_reps, item["date"]
+        if volume > current["max_volume"]:
+            current["max_volume"], current["volume_date"] = volume, item["date"]
+    return sorted(records.values(), key=lambda item: item["exercise"].casefold())
+
+
+def get_calendar_days():
+    days = {item["date"] for item in get_history()}
+    with sqlite3.connect(database_path()) as db:
+        days.update(row[0] for row in db.execute("SELECT date FROM training_sessions"))
+    return sorted(days)
+
+
+def get_goals():
+    goals = load_config().get("goals", {})
+    return goals if isinstance(goals, dict) else {}
+
+
+def save_goals(payload):
+    goals = {}
+    for key in ("target_weight", "target_workouts", "target_record"):
+        raw = payload.get(key, "")
+        if raw in (None, ""):
+            goals[key] = None
+            continue
+        try:
+            value = float(raw)
+        except (TypeError, ValueError):
+            raise ValueError("Цели должны быть числами.")
+        if value <= 0:
+            raise ValueError("Цели должны быть больше нуля.")
+        goals[key] = int(value) if key == "target_workouts" else value
+    goals["target_exercise"] = str(payload.get("target_exercise", "")).strip()[:80]
+    if goals["target_record"] and not goals["target_exercise"]:
+        raise ValueError("Выбери упражнение для цели рекорда.")
+    config = load_config()
+    config["goals"] = goals
+    save_config(config)
+    return goals
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -615,6 +685,8 @@ class Handler(BaseHTTPRequestHandler):
                     return self.send_json(200, {"user": user, "profile": get_profile(), "exercises": exercises,
                                                 "history": get_history(), "sessions": get_sessions(),
                                                 "weight_history": get_weight_history(),
+                                                "records": get_records(), "calendar_days": get_calendar_days(),
+                                                "goals": get_goals(),
                                                 "programs": get_programs(),
                                                 "active_session": active_session(),
                                                 "settings": load_config().get("settings", {})})
@@ -656,6 +728,8 @@ class Handler(BaseHTTPRequestHandler):
             if path == "/api/profile":
                 profile = set_profile(payload)
                 return self.send_json(200, {"profile": profile})
+            if path == "/api/goals":
+                return self.send_json(200, {"goals": save_goals(payload)})
             if path == "/api/exercises":
                 category = str(payload.get("category", ""))
                 name = str(payload.get("name", "")).strip()[:80]
