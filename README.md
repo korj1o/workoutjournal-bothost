@@ -28,6 +28,10 @@ Each Telegram account receives its own SQLite database and settings file under
 signed `initData` on every API request. The data directory is persistent on
 Bothost and must not be committed to Git.
 
+Workout programs, editable profile weight, weight-trend periods, and previous
+session summaries are stored per account. The Telegram menu uses its default
+button; `/start` sends the Mini App launch button in chat.
+
 The app's initial deployment starts with an empty database. Existing local
 Windows workout history is not included in this repository.
 

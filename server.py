@@ -12,6 +12,7 @@ import sqlite3
 import sys
 import time
 import threading
+import uuid
 from contextvars import ContextVar
 from datetime import date, datetime
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -141,6 +142,11 @@ def ensure_schema(path=None):
         db.execute("""CREATE TABLE IF NOT EXISTS training_sessions (
             id INTEGER PRIMARY KEY, date TEXT NOT NULL, session_start TEXT NOT NULL,
             session_end TEXT, body_weight REAL NOT NULL, created TEXT NOT NULL)""")
+        session_columns = {row[1] for row in db.execute("PRAGMA table_info(training_sessions)")}
+        if "program_id" not in session_columns:
+            db.execute("ALTER TABLE training_sessions ADD COLUMN program_id TEXT")
+        if "program_name" not in session_columns:
+            db.execute("ALTER TABLE training_sessions ADD COLUMN program_name TEXT")
         db.execute("""CREATE UNIQUE INDEX IF NOT EXISTS one_active_training_session
             ON training_sessions((1)) WHERE session_end IS NULL""")
         db.execute("CREATE INDEX IF NOT EXISTS workouts_session_id ON workouts(session_id)")
@@ -240,11 +246,7 @@ def get_weight_history():
 
 
 def get_profile():
-    profile = dict(load_config().get("profile", {}))
-    weights = get_weight_history()
-    if weights:
-        profile["body_weight"] = weights[-1]["weight"]
-    return profile
+    return dict(load_config().get("profile", {}))
 
 
 def set_profile(payload):
@@ -252,9 +254,8 @@ def set_profile(payload):
     gender = str(payload.get("gender", ""))
     if gender not in ("Мужской", "Женский", "Другой"):
         raise ValueError("������ ���.")
-    weights = get_weight_history()
     try:
-        weight = weights[-1]["weight"] if weights else float(payload.get("body_weight", ""))
+        weight = float(payload.get("body_weight", ""))
         height = float(payload.get("height", ""))
     except (TypeError, ValueError):
         raise ValueError("����� ��� � ���� �������.")
@@ -277,27 +278,28 @@ def time_pair(start, end):
 def session_dict(row):
     if row is None:
         return None
-    session_id, day, start, end, body = row
+    session_id, day, start, end, body, program_id, program_name = row
     return {"id": session_id, "date": day, "session_start": start,
-            "session_end": end, "body_weight": body}
+            "session_end": end, "body_weight": body,
+            "program_id": program_id, "program_name": program_name}
 
 
 def active_session():
     with sqlite3.connect(database_path()) as db:
-        row = db.execute("""SELECT id,date,session_start,session_end,body_weight
+        row = db.execute("""SELECT id,date,session_start,session_end,body_weight,program_id,program_name
             FROM training_sessions WHERE session_end IS NULL ORDER BY id DESC LIMIT 1""").fetchone()
     return session_dict(row)
 
 
 def get_sessions():
     with sqlite3.connect(database_path()) as db:
-        rows = db.execute("""SELECT id,date,session_start,session_end,body_weight
+        rows = db.execute("""SELECT id,date,session_start,session_end,body_weight,program_id,program_name
             FROM training_sessions ORDER BY date DESC,id DESC LIMIT 500""").fetchall()
     return [session_dict(row) for row in rows]
 
 
 def session_by_id(db, session_id):
-    row = db.execute("""SELECT id,date,session_start,session_end,body_weight
+    row = db.execute("""SELECT id,date,session_start,session_end,body_weight,program_id,program_name
         FROM training_sessions WHERE id=?""", (session_id,)).fetchone()
     return session_dict(row)
 
@@ -316,11 +318,18 @@ def session_fields(payload):
 
 def create_session(payload):
     day, start, body = session_fields(payload)
+    program_id = str(payload.get("program_id", "")).strip() or None
+    program_name = None
+    if program_id:
+        program = next((p for p in load_config().get("programs", []) if str(p.get("id")) == program_id), None)
+        if program is None:
+            raise ValueError("Выбранная программа не найдена. Обнови список программ.")
+        program_name = str(program.get("name", ""))[:80]
     with sqlite3.connect(database_path()) as db:
         if db.execute("SELECT 1 FROM training_sessions WHERE session_end IS NULL LIMIT 1").fetchone():
             raise ValueError("������� ������� ������� ����������.")
-        cur = db.execute("""INSERT INTO training_sessions(date,session_start,body_weight,created)
-            VALUES(?,?,?,?)""", (day, start, body, datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
+        cur = db.execute("""INSERT INTO training_sessions(date,session_start,body_weight,created,program_id,program_name)
+            VALUES(?,?,?,?,?,?)""", (day, start, body, datetime.now().strftime("%Y-%m-%d %H:%M:%S"), program_id, program_name))
         session = session_by_id(db, cur.lastrowid)
     update_profile_weight(body)
     return session
@@ -353,6 +362,54 @@ def allowed_exercises(category):
         return list(dict.fromkeys([x for values in EXERCISES.values() for x in values]
                                   + [x for key, values in custom.items() if key != OTHER_CATEGORY for x in values]))
     return list(EXERCISES.get(category, [])) + list(custom.get(category, []))
+
+
+def get_programs():
+    programs = load_config().get("programs", [])
+    return programs if isinstance(programs, list) else []
+
+
+def save_program(payload, program_id=None):
+    name = str(payload.get("name", "")).strip()[:80]
+    raw_exercises = payload.get("exercises", [])
+    if not name or not isinstance(raw_exercises, list) or not raw_exercises or len(raw_exercises) > 40:
+        raise ValueError("Укажи название программы и добавь от 1 до 40 упражнений.")
+    exercises = []
+    for item in raw_exercises:
+        category = str(item.get("category", ""))
+        exercise = str(item.get("exercise", "")).strip()[:80]
+        try:
+            sets = int(item.get("sets", 3))
+        except (TypeError, ValueError):
+            raise ValueError("Количество подходов должно быть от 1 до 100.")
+        if category not in CATEGORIES or category == OTHER_CATEGORY or exercise not in allowed_exercises(category):
+            raise ValueError("Выбери упражнение из списка доступных.")
+        if not 1 <= sets <= 100:
+            raise ValueError("Количество подходов должно быть от 1 до 100.")
+        exercises.append({"category": category, "exercise": exercise, "sets": sets})
+    config = load_config()
+    programs = config.setdefault("programs", [])
+    if program_id:
+        old = next((item for item in programs if str(item.get("id")) == str(program_id)), None)
+        if old is None:
+            raise ValueError("Программа не найдена.")
+        updated = {"id": str(program_id), "name": name, "exercises": exercises}
+        programs[programs.index(old)] = updated
+    else:
+        updated = {"id": uuid.uuid4().hex, "name": name, "exercises": exercises}
+        programs.append(updated)
+    save_config(config)
+    return updated
+
+
+def delete_program(program_id):
+    config = load_config()
+    programs = config.get("programs", [])
+    filtered = [item for item in programs if str(item.get("id")) != str(program_id)]
+    if len(filtered) == len(programs):
+        raise ValueError("Программа не найдена.")
+    config["programs"] = filtered
+    save_config(config)
 
 
 def prepare_workout(payload, require_available=True):
@@ -558,6 +615,7 @@ class Handler(BaseHTTPRequestHandler):
                     return self.send_json(200, {"user": user, "profile": get_profile(), "exercises": exercises,
                                                 "history": get_history(), "sessions": get_sessions(),
                                                 "weight_history": get_weight_history(),
+                                                "programs": get_programs(),
                                                 "active_session": active_session(),
                                                 "settings": load_config().get("settings", {})})
                 if parsed.path == "/api/history":
@@ -605,6 +663,8 @@ class Handler(BaseHTTPRequestHandler):
                     raise ValueError("����� ������ � �������� ����������.")
                 exercises = save_custom_exercise(category, name)
                 return self.send_json(201, {"category": category, "exercises": exercises})
+            if path == "/api/programs":
+                return self.send_json(201, {"program": save_program(payload)})
             return self.send_json(404, {"error": "����������� �����."})
         except PermissionError as exc:
             return self.send_json(401, {"error": str(exc)})
@@ -636,6 +696,9 @@ class Handler(BaseHTTPRequestHandler):
                     raise ValueError("����� ������ � ����� �������� ����������.")
                 exercises = rename_custom_exercise(category, old_name, name)
                 return self.send_json(200, {"category": category, "exercises": exercises})
+            match = re.fullmatch(r"/api/programs/([a-f0-9]+)", path)
+            if match:
+                return self.send_json(200, {"program": save_program(payload, match.group(1))})
             return self.send_json(404, {"error": "����������� �����."})
         except PermissionError as exc:
             return self.send_json(401, {"error": str(exc)})
@@ -662,6 +725,10 @@ class Handler(BaseHTTPRequestHandler):
                     raise ValueError("����� ������ � ���������� ��� ��������.")
                 exercises = delete_custom_exercise(category, name)
                 return self.send_json(200, {"category": category, "exercises": exercises})
+            match = re.fullmatch(r"/api/programs/([a-f0-9]+)", path)
+            if match:
+                delete_program(match.group(1))
+                return self.send_json(200, {"programs": get_programs()})
             return self.send_json(404, {"error": "����������� �����."})
         except PermissionError as exc:
             return self.send_json(401, {"error": str(exc)})
@@ -686,7 +753,7 @@ def telegram_api(method, payload, timeout=35):
 
 
 def telegram_updates():
-    """Keep /start and the Mini App menu button available on the hosted bot."""
+    """Keep the /start launch button available without a custom chat menu button."""
     if not APP_URL:
         print("APP_URL/DOMAIN is missing; Telegram launch buttons are not configured yet.")
         return
@@ -698,9 +765,7 @@ def telegram_updates():
     offset = None
     try:
         telegram_api("deleteWebhook", {"drop_pending_updates": False}, timeout=20)
-        telegram_api("setChatMenuButton", {"menu_button": {
-            "type": "web_app", "text": "Тренировка", "web_app": {"url": APP_URL}
-        }}, timeout=20)
+        telegram_api("setChatMenuButton", {"menu_button": {"type": "default"}}, timeout=20)
     except Exception as exc:
         print(f"Could not configure Telegram menu ({type(exc).__name__}); will retry updates.")
 
