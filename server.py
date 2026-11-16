@@ -13,6 +13,9 @@ import sys
 import time
 import threading
 import uuid
+import shutil
+import tempfile
+import zipfile
 from contextvars import ContextVar
 from datetime import date, datetime
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -55,6 +58,11 @@ DEV_MODE = os.environ.get("TELEGRAM_MINIAPP_DEV", "") == "1"
 DEV_USER_ID = os.environ.get("TELEGRAM_MINIAPP_DEV_USER", "1")
 PORT = int(os.environ.get("PORT", os.environ.get("TELEGRAM_MINIAPP_PORT", "3000")))
 APP_URL = os.environ.get("APP_URL", "").strip()
+BACKUP_CHAT_ID = os.environ.get("BACKUP_CHAT_ID", "").strip() or OWNER_USER_ID
+try:
+    BACKUP_INTERVAL_HOURS = max(1.0, float(os.environ.get("BACKUP_INTERVAL_HOURS", "24")))
+except ValueError:
+    BACKUP_INTERVAL_HOURS = 24.0
 if not APP_URL:
     _domain = os.environ.get("DOMAIN", "").strip()
     if _domain:
@@ -826,6 +834,94 @@ def telegram_api(method, payload, timeout=35):
     return result.get("result")
 
 
+def send_backup_document(archive_path):
+    if not BACKUP_CHAT_ID:
+        return False
+    boundary = f"----WorkoutJournal{uuid.uuid4().hex}"
+    content = archive_path.read_bytes()
+    parts = []
+    def field(name, value):
+        parts.extend([
+            f"--{boundary}\r\n".encode(),
+            f'Content-Disposition: form-data; name="{name}"\r\n\r\n'.encode(),
+            str(value).encode(), b"\r\n",
+        ])
+    field("chat_id", BACKUP_CHAT_ID)
+    field("caption", f"WorkoutJournal backup · {datetime.now():%Y-%m-%d %H:%M}")
+    parts.extend([
+        f"--{boundary}\r\n".encode(),
+        f'Content-Disposition: form-data; name="document"; filename="workoutjournal-backup-{datetime.now():%Y-%m-%d}.zip"\r\n'.encode(),
+        b"Content-Type: application/zip\r\n\r\n", content, b"\r\n",
+        f"--{boundary}--\r\n".encode(),
+    ])
+    request = Request(
+        f"https://api.telegram.org/bot{BOT_TOKEN}/sendDocument",
+        data=b"".join(parts),
+        headers={"Content-Type": f"multipart/form-data; boundary={boundary}"},
+        method="POST",
+    )
+    with urlopen(request, timeout=60) as response:
+        result = json.loads(response.read().decode("utf-8"))
+    if not result.get("ok"):
+        raise RuntimeError("Telegram rejected the backup document")
+    return True
+
+
+def create_backup_archive():
+    """Create a consistent archive of all user data without storing it on the host."""
+    fd, archive_name = tempfile.mkstemp(prefix="workoutjournal-", suffix=".zip")
+    os.close(fd)
+    archive = Path(archive_name)
+    try:
+        with tempfile.TemporaryDirectory(prefix="workoutjournal-snapshot-") as snapshot:
+            snapshot_root = Path(snapshot)
+            for source in DATA_DIR.rglob("*"):
+                if not source.is_file() or source.name.endswith((".tmp", ".zip")):
+                    continue
+                relative = source.relative_to(DATA_DIR)
+                target = snapshot_root / relative
+                target.parent.mkdir(parents=True, exist_ok=True)
+                if source.suffix in (".sqlite3", ".sqlite", ".db"):
+                    with sqlite3.connect(source) as source_db, sqlite3.connect(target) as target_db:
+                        source_db.backup(target_db)
+                else:
+                    shutil.copy2(source, target)
+            with zipfile.ZipFile(archive, "w", zipfile.ZIP_DEFLATED) as result:
+                for item in snapshot_root.rglob("*"):
+                    if item.is_file():
+                        result.write(item, item.relative_to(snapshot_root))
+        return archive
+    except Exception:
+        archive.unlink(missing_ok=True)
+        raise
+
+
+def backup_once():
+    if not BACKUP_CHAT_ID:
+        print("Automatic backup is disabled: BACKUP_CHAT_ID is not configured.")
+        return False
+    archive = None
+    try:
+        archive = create_backup_archive()
+        send_backup_document(archive)
+        print("Automatic Telegram backup sent.")
+        return True
+    except Exception as exc:
+        print(f"Automatic backup failed ({type(exc).__name__}).")
+        return False
+    finally:
+        if archive:
+            archive.unlink(missing_ok=True)
+
+
+def backup_loop():
+    # Send one copy after startup, then continue on the configured interval.
+    time.sleep(10)
+    while True:
+        sent = backup_once()
+        time.sleep(BACKUP_INTERVAL_HOURS * 3600 if sent else 15 * 60)
+
+
 def telegram_updates():
     """Keep the /start launch button available without a custom chat menu button."""
     if not APP_URL:
@@ -854,7 +950,13 @@ def telegram_updates():
                 incoming = update.get("message", {})
                 chat = incoming.get("chat", {})
                 command = str(incoming.get("text", "")).strip().split(" ", 1)[0].split("@", 1)[0]
-                if chat.get("type") != "private" or command != "/start":
+                if chat.get("type") != "private":
+                    continue
+                if command == "/backup" and str(chat.get("id")) == str(BACKUP_CHAT_ID):
+                    ok = backup_once()
+                    telegram_api("sendMessage", {"chat_id": chat["id"], "text": "Резервная копия отправлена." if ok else "Не удалось создать резервную копию."}, timeout=20)
+                    continue
+                if command != "/start":
                     continue
                 telegram_api("sendMessage", {
                     "chat_id": chat["id"], "text": message, "reply_markup": markup,
@@ -876,6 +978,7 @@ def run():
     print("Telegram Mini App stores a separate private journal for each Telegram account.")
     if not DEV_MODE:
         threading.Thread(target=telegram_updates, name="telegram-updates", daemon=True).start()
+        threading.Thread(target=backup_loop, name="backup-loop", daemon=True).start()
     if DEV_MODE:
         print("WARNING: development authentication is enabled; do not expose this server to the internet.")
     try:
