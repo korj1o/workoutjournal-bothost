@@ -47,6 +47,20 @@ after sending. Backups contain user profiles and workout records, so set the
 chat ID to a private administrator account only. GitHub never stores database
 files or backup archives.
 
+## Workout entry helpers
+
+The exercise editor shows each set's result from the latest earlier workout for
+that exercise, including entries recorded through the "Other" category. The
+repeat button copies weights and repetitions. Sets do not require completion marks.
+Existing inputs require confirmation before replacement.
+
+Unsaved exercise inputs (including cardio) and the new-session form are saved on
+each input in browser local storage, scoped to the authenticated Telegram user
+and active session. Saving an exercise clears only its draft; failed saves keep
+it. These drafts belong to this device and web origin, so a different temporary
+tunnel address, cleared browser storage, or another device will not restore them.
+Finished workout records continue to live in the server database as before.
+
 ## Local run
 
 Set `TELEGRAM_BOT_TOKEN` and `APP_URL` in the environment, then run:

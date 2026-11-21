@@ -8,7 +8,7 @@
   
   <style>
     :root{color-scheme:light;--bg:#f4f6f2;--paper:#fff;--ink:#24352d;--muted:#718078;--line:#e2e9e2;--accent:#34765b;--accent-soft:#e6f0e9;--warm:#f1eee6;--danger:#a34747;--shadow:0 8px 28px #20382a0c;--safe-bottom:env(safe-area-inset-bottom,0px)}
-    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding:0 0 calc(82px + var(--safe-bottom))}button,input,select{font:inherit}button{cursor:pointer}#app{max-width:620px;margin:0 auto;min-height:100vh}.top{padding:calc(18px + env(safe-area-inset-top,0px)) 20px 14px;background:var(--bg);position:sticky;top:0;z-index:5}.eyebrow{font-size:11px;letter-spacing:.12em;font-weight:750;color:var(--muted)}h1{font-size:25px;line-height:1.15;margin:7px 0 3px;letter-spacing:-.035em}.subhead{color:var(--muted);font-size:13px}.content{padding:4px 16px 24px}.hero{position:relative;overflow:hidden;padding:19px 20px;margin:0 0 15px;background:#e7efe7;border-radius:22px;min-height:112px}.hero:after{content:"";position:absolute;width:112px;height:112px;border-radius:50%;background:#d6e5d8;right:-17px;top:-23px}.hero strong{position:relative;z-index:1;display:block;font-size:18px;max-width:74%;line-height:1.22}.hero span{position:relative;z-index:1;display:block;color:#63756a;font-size:12px;margin-top:8px;max-width:78%}.card{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:17px;margin:0 0 13px;box-shadow:var(--shadow)}.section-title{font-size:15px;font-weight:750;margin:1px 0 14px}.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field{min-width:0;margin:0 0 13px}.field label{display:block;color:var(--muted);font-size:11px;font-weight:700;margin:0 0 6px}.field input,.field select,.text-input{display:block;width:100%;min-width:0;height:44px;border:1px solid var(--line);border-radius:12px;background:#fbfcfa;color:var(--ink);padding:0 12px;outline:none}.field input:focus,.field select:focus,.text-input:focus{border-color:#78a58c;box-shadow:0 0 0 3px #5a9a711b}.segments{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;margin:0 0 13px}.segment{border:1px solid var(--line);background:#f8faf7;color:#64736a;border-radius:11px;min-height:40px;padding:6px 2px;font-size:11px;font-weight:700}.segment.active{background:var(--accent);border-color:var(--accent);color:white}.exercise-line{display:flex;gap:8px;align-items:center}.exercise-line select{flex:1}.icon-add{height:42px;width:44px;border:1px solid var(--line);background:var(--accent-soft);color:var(--accent);border-radius:12px;font-size:22px}.set-head,.set-row{display:grid;grid-template-columns:35px 1fr 1fr 42px;gap:7px;align-items:center}.set-head{color:var(--muted);font-size:10px;font-weight:700;margin:5px 1px 7px}.set-row{margin-bottom:7px}.set-num{font-size:12px;font-weight:750;color:var(--accent);text-align:center}.set-row input{width:100%;min-width:0;height:40px;border:1px solid var(--line);border-radius:10px;padding:0 9px;background:#fbfcfa;color:var(--ink)}.check{height:38px;border:0;border-radius:10px;background:#edf2ec;color:var(--muted);font-size:16px}.check.done{background:#dceddf;color:#34765b}.link-btn{border:0;background:transparent;color:var(--accent);font-size:12px;font-weight:750;padding:8px 2px}.primary{width:100%;height:48px;border:0;border-radius:14px;background:var(--accent);color:#fff;font-weight:750;box-shadow:0 5px 14px #34765b28}.primary:disabled{opacity:.6}.secondary{height:40px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--accent);font-weight:700;padding:0 13px}.hint{font-size:11px;color:var(--muted);margin:-4px 0 12px}.notice{display:none;padding:11px 13px;margin:0 0 12px;border-radius:12px;font-size:13px}.notice.error{display:block;background:#f9e9e7;color:var(--danger)}.notice.success{display:block;background:#e7f2e8;color:#34765b}.hidden{display:none!important}.history-day{margin-bottom:11px}.history-day summary{list-style:none;display:flex;align-items:center;justify-content:space-between;cursor:pointer;padding:15px 16px;font-weight:750}.history-day summary::-webkit-details-marker{display:none}.day-total{font-size:11px;color:var(--muted);font-weight:600}.history-items{padding:0 13px 11px}.workout-item{border-top:1px solid var(--line);padding:12px 3px}.workout-name{font-size:14px;font-weight:750}.workout-meta{color:var(--muted);font-size:11px;margin-top:4px}.set-badges{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px}.badge{border-radius:8px;background:#f0f4ef;color:#52675a;padding:4px 7px;font-size:10px}.metric-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.metric{background:#f7f9f6;border-radius:15px;padding:14px}.metric small{display:block;font-size:10px;letter-spacing:.06em;color:var(--muted);font-weight:750}.metric strong{display:block;font-size:26px;letter-spacing:-.03em;margin-top:4px}.metric span{font-size:11px;color:var(--muted)}.bmi-scale{height:7px;border-radius:9px;background:linear-gradient(90deg,#8fb5d1 0 27%,#82b78b 27% 55%,#e3bb70 55% 75%,#cf8580 75%);margin:14px 0 7px;position:relative}.bmi-marker{position:absolute;width:13px;height:13px;border:3px solid #fff;background:var(--ink);border-radius:50%;top:-3px;left:0;box-shadow:0 1px 5px #0004}.empty{padding:24px 12px;text-align:center;color:var(--muted);font-size:13px}.bottom-nav{position:fixed;z-index:10;bottom:0;left:0;right:0;background:#ffffffed;backdrop-filter:blur(18px);border-top:1px solid var(--line);padding:8px 12px calc(8px + var(--safe-bottom));display:flex;justify-content:center}.nav-inner{width:100%;max-width:620px;display:grid;grid-template-columns:repeat(5,1fr);gap:3px}.tab{border:0;background:transparent;color:#819087;border-radius:12px;min-height:48px;font-size:9px;font-weight:700;padding:0 1px}.tab span{display:block;font-size:18px;line-height:1.1;margin-bottom:2px}.tab.active{background:var(--accent-soft);color:var(--accent)}.profile-card{display:flex;gap:12px;align-items:center}.avatar{width:45px;height:45px;border-radius:15px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;font-size:20px;font-weight:800}.help{color:var(--muted);font-size:12px;line-height:1.5}.loader{padding:45px 20px;text-align:center;color:var(--muted)}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding:0 0 calc(82px + var(--safe-bottom))}button,input,select{font:inherit}button{cursor:pointer}#app{max-width:620px;margin:0 auto;min-height:100vh}.top{padding:calc(18px + env(safe-area-inset-top,0px)) 20px 14px;background:var(--bg);position:sticky;top:0;z-index:5}.eyebrow{font-size:11px;letter-spacing:.12em;font-weight:750;color:var(--muted)}h1{font-size:25px;line-height:1.15;margin:7px 0 3px;letter-spacing:-.035em}.subhead{color:var(--muted);font-size:13px}.content{padding:4px 16px 24px}.hero{position:relative;overflow:hidden;padding:19px 20px;margin:0 0 15px;background:#e7efe7;border-radius:22px;min-height:112px}.hero:after{content:"";position:absolute;width:112px;height:112px;border-radius:50%;background:#d6e5d8;right:-17px;top:-23px}.hero strong{position:relative;z-index:1;display:block;font-size:18px;max-width:74%;line-height:1.22}.hero span{position:relative;z-index:1;display:block;color:#63756a;font-size:12px;margin-top:8px;max-width:78%}.card{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:17px;margin:0 0 13px;box-shadow:var(--shadow)}.section-title{font-size:15px;font-weight:750;margin:1px 0 14px}.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field{min-width:0;margin:0 0 13px}.field label{display:block;color:var(--muted);font-size:11px;font-weight:700;margin:0 0 6px}.field input,.field select,.text-input{display:block;width:100%;min-width:0;height:44px;border:1px solid var(--line);border-radius:12px;background:#fbfcfa;color:var(--ink);padding:0 12px;outline:none}.field input:focus,.field select:focus,.text-input:focus{border-color:#78a58c;box-shadow:0 0 0 3px #5a9a711b}.segments{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;margin:0 0 13px}.segment{border:1px solid var(--line);background:#f8faf7;color:#64736a;border-radius:11px;min-height:40px;padding:6px 2px;font-size:11px;font-weight:700}.segment.active{background:var(--accent);border-color:var(--accent);color:white}.exercise-line{display:flex;gap:8px;align-items:center}.exercise-line select{flex:1}.icon-add{height:42px;width:44px;border:1px solid var(--line);background:var(--accent-soft);color:var(--accent);border-radius:12px;font-size:22px}.set-head,.set-row{display:grid;grid-template-columns:35px minmax(0,1fr) minmax(0,1fr);gap:7px;align-items:center}.set-head{color:var(--muted);font-size:10px;font-weight:700;margin:5px 1px 7px}.set-row{margin-bottom:7px}.set-num{font-size:12px;font-weight:750;color:var(--accent);text-align:center}.set-row input{width:100%;min-width:0;height:40px;border:1px solid var(--line);border-radius:10px;padding:0 9px;background:#fbfcfa;color:var(--ink)}.link-btn{border:0;background:transparent;color:var(--accent);font-size:12px;font-weight:750;padding:8px 2px}.primary{width:100%;height:48px;border:0;border-radius:14px;background:var(--accent);color:#fff;font-weight:750;box-shadow:0 5px 14px #34765b28}.primary:disabled{opacity:.6}.secondary{height:40px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--accent);font-weight:700;padding:0 13px}.hint{font-size:11px;color:var(--muted);margin:-4px 0 12px}.notice{display:none;padding:11px 13px;margin:0 0 12px;border-radius:12px;font-size:13px}.notice.error{display:block;background:#f9e9e7;color:var(--danger)}.notice.success{display:block;background:#e7f2e8;color:#34765b}.hidden{display:none!important}.history-day{margin-bottom:11px}.history-day summary{list-style:none;display:flex;align-items:center;justify-content:space-between;cursor:pointer;padding:15px 16px;font-weight:750}.history-day summary::-webkit-details-marker{display:none}.day-total{font-size:11px;color:var(--muted);font-weight:600}.history-items{padding:0 13px 11px}.workout-item{border-top:1px solid var(--line);padding:12px 3px}.workout-name{font-size:14px;font-weight:750}.workout-meta{color:var(--muted);font-size:11px;margin-top:4px}.set-badges{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px}.badge{border-radius:8px;background:#f0f4ef;color:#52675a;padding:4px 7px;font-size:10px}.metric-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.metric{background:#f7f9f6;border-radius:15px;padding:14px}.metric small{display:block;font-size:10px;letter-spacing:.06em;color:var(--muted);font-weight:750}.metric strong{display:block;font-size:26px;letter-spacing:-.03em;margin-top:4px}.metric span{font-size:11px;color:var(--muted)}.bmi-scale{height:7px;border-radius:9px;background:linear-gradient(90deg,#8fb5d1 0 27%,#82b78b 27% 55%,#e3bb70 55% 75%,#cf8580 75%);margin:14px 0 7px;position:relative}.bmi-marker{position:absolute;width:13px;height:13px;border:3px solid #fff;background:var(--ink);border-radius:50%;top:-3px;left:0;box-shadow:0 1px 5px #0004}.empty{padding:24px 12px;text-align:center;color:var(--muted);font-size:13px}.bottom-nav{position:fixed;z-index:10;bottom:0;left:0;right:0;background:#ffffffed;backdrop-filter:blur(18px);border-top:1px solid var(--line);padding:8px 12px calc(8px + var(--safe-bottom));display:flex;justify-content:center}.nav-inner{width:100%;max-width:620px;display:grid;grid-template-columns:repeat(5,1fr);gap:3px}.tab{border:0;background:transparent;color:#819087;border-radius:12px;min-height:48px;font-size:9px;font-weight:700;padding:0 1px}.tab span{display:block;font-size:18px;line-height:1.1;margin-bottom:2px}.tab.active{background:var(--accent-soft);color:var(--accent)}.profile-card{display:flex;gap:12px;align-items:center}.avatar{width:45px;height:45px;border-radius:15px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;font-size:20px;font-weight:800}.help{color:var(--muted);font-size:12px;line-height:1.5}.loader{padding:45px 20px;text-align:center;color:var(--muted)}
     @media(min-width:560px){.content{padding-left:22px;padding-right:22px}.top{padding-left:26px;padding-right:26px}.card{padding:20px}.segments{gap:8px}.segment{font-size:12px}}
   </style>
 <style>
@@ -19,10 +19,11 @@
 <style>
 .more-drawer-backdrop{position:fixed;inset:0;z-index:900;background:#14221e66;display:none}.more-drawer-backdrop.open{display:block}.more-drawer{position:absolute;left:0;right:0;bottom:0;background:var(--paper);border-radius:22px 22px 0 0;padding:18px 16px calc(18px + var(--safe-bottom));box-shadow:0 -16px 45px #0002;transform:translateY(100%);transition:transform .22s ease}.more-drawer-backdrop.open .more-drawer{transform:translateY(0)}.more-drawer-handle{width:42px;height:4px;border-radius:5px;background:var(--line);margin:0 auto 15px}.more-drawer-title{font-weight:800;font-size:17px;margin-bottom:10px}.more-drawer-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.more-drawer-item{border:1px solid var(--line);background:var(--accent-soft);color:var(--accent);border-radius:14px;padding:14px 12px;text-align:left;font-weight:750}.more-drawer-item span{display:block;font-size:21px;margin-bottom:5px}.more-drawer-item small{display:block;color:var(--muted);font-size:11px;font-weight:500;margin-top:3px}
 </style>
+<link rel="stylesheet" href="/studio.css?v=20261121-no-checks">
 </head>
 <body>
 <div id="app">
-  <header class="top"><div class="eyebrow">ЛИЧНЫЙ ДНЕВНИК</div><h1 id="title">Тренировка</h1><div class="subhead" id="subtitle">Сохраняй занятия и следи за прогрессом</div></header>
+  <header class="top"><div class="brand-row"><div class="brand"><span class="brand-symbol" id="brandIcon"></span>WorkoutJournal</div><button class="theme-button" id="themeToggle" aria-label="Переключить тему"></button></div><div class="eyebrow">ЛИЧНЫЙ ДНЕВНИК</div><h1 id="title">Тренировка</h1><div class="subhead" id="subtitle">Сохраняй занятия и следи за прогрессом</div></header>
   <main class="content" id="screen"><div class="loader">Загружаю дневник…</div></main>
   <nav class="bottom-nav"><div class="nav-inner">
     <button class="tab active" data-tab="record"><span>＋</span>Запись</button>
@@ -42,6 +43,35 @@
   const state = {meta:null, data:null, tab:"record", category:"Грудь", cardio:false, sets:[], selectedExercise:"", weightPeriod:"month", newProgramId:"", viewProgramId:"", programDraft:[], templateSets:3, moreMonth:new Date(), moreSection:"calendarSection"};
   const $ = (selector, root=document) => root.querySelector(selector);
   const screen = $("#screen");
+  const iconPaths = {
+    record:'<path d="m6 6 12 12M4 9l5-5M2 7l5-5m8 18 5-5m-3 7 5-5M7 10l3-3m4 10 3-3"/>',
+    programs:'<rect x="5" y="4" width="14" height="17" rx="3"/><path d="M9 4V2h6v2M9 10h6M9 14h6M9 18h3"/>',
+    history:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+    profile:'<circle cx="12" cy="8" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2"/>',
+    more:'<rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/>',
+    calendar:'<rect x="3" y="5" width="18" height="16" rx="3"/><path d="M7 3v4m10-4v4M3 11h18m-13 4h1m6 0h1m-8 3h1"/>',
+    trophy:'<path d="M8 3h8v6a4 4 0 0 1-8 0V3Zm0 2H4v3a4 4 0 0 0 4 4m8-7h4v3a4 4 0 0 1-4 4m-4 1v5m-4 3h8m-8 0v-3h8v3"/>',
+    target:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/>',
+    moon:'<path d="M20.5 13a8.5 8.5 0 0 1-9.5-9.5A8.5 8.5 0 1 0 20.5 13Z"/>',
+    sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/>',
+    arrow:'<path d="M4 12h16m-6-6 6 6-6 6"/>'
+  };
+  const icon = name => `<svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true">${iconPaths[name]||iconPaths.record}</svg>`;
+  function applyTheme(theme){
+    document.documentElement.dataset.theme=theme;
+    const dark=theme==="dark";
+    $("#themeToggle").innerHTML=icon(dark?"sun":"moon");
+    $("#themeToggle").setAttribute("aria-label",dark?"Включить светлую тему":"Включить тёмную тему");
+    document.querySelector('meta[name="theme-color"]').content=dark?"#111a17":"#f3f5f2";
+    try{tg?.setHeaderColor(dark?"#111a17":"#f3f5f2");tg?.setBackgroundColor(dark?"#111a17":"#f3f5f2");}catch(_){}
+  }
+  let savedTheme;try{savedTheme=localStorage.getItem("workoutjournal.theme");}catch(_){}
+  applyTheme(["dark","light"].includes(savedTheme)?savedTheme:(tg?.colorScheme||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")));
+  $("#themeToggle").onclick=()=>{const theme=document.documentElement.dataset.theme==="dark"?"light":"dark";applyTheme(theme);try{localStorage.setItem("workoutjournal.theme",theme);}catch(_){}};
+  $("#brandIcon").innerHTML=icon("record");
+  document.querySelectorAll(".tab").forEach(button=>button.querySelector("span").innerHTML=icon(button.dataset.tab));
+  const drawerIcons={calendarSection:"calendar",recordsSection:"trophy",goalsSection:"target"};
+  document.querySelectorAll("[data-more-anchor]").forEach(button=>button.querySelector("span").innerHTML=icon(drawerIcons[button.dataset.moreAnchor]));
   const localDev = false;
   const fmtTime = d => `${String(d.getHours()).padStart(2,"0")}:${String(d.getMinutes()).padStart(2,"0")}`;
   function headers(json=false) {
@@ -60,15 +90,59 @@
     if (!result.ok) throw new Error(response.error || "Не удалось выполнить запрос.");
     return response;
   }  const esc = value => String(value ?? "").replace(/[&<>"']/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[ch]));
+  let drafts={entries:{}}, draftStorageKey="", draftStorageOK=true;
+  const draftEntryKey=()=>JSON.stringify([state.cardio?"Кардио":state.category,state.selectedExercise]);
+  function loadDrafts(){
+    const userId=state.data.user?.id;
+    draftStorageKey=userId?`workoutjournal.draft.v1.${userId}`:"";
+    try{const saved=JSON.parse(localStorage.getItem(draftStorageKey)||"null");if(saved&&saved.version===1&&saved.entries&&typeof saved.entries==="object")drafts=saved;}
+    catch(_){draftStorageOK=false;}
+    if(!draftStorageKey)draftStorageOK=false;
+    syncDraftSession();
+    if(drafts.selected&&Object.hasOwn(state.data.exercises,drafts.selected.category)){state.category=drafts.selected.category;state.cardio=state.category==="Кардио";state.selectedExercise=String(drafts.selected.exercise||"");}
+  }
+  function draftStatus(){const el=$("#draftStatus");if(el)el.textContent=draftStorageOK?"Черновик сохраняется на этом устройстве":"Не удалось сохранить черновик на устройстве. Не закрывай приложение до добавления упражнения.";}
+  function writeDrafts(){
+    try{if(!draftStorageKey)throw new Error("Missing account");localStorage.setItem(draftStorageKey,JSON.stringify({...drafts,version:1}));draftStorageOK=true;}
+    catch(_){draftStorageOK=false;}
+    draftStatus();
+  }
+  function syncDraftSession(){
+    const session=state.data.active_session;
+    const id=session?String(session.id):null;
+    if(drafts.sessionId!==id){drafts={version:1,sessionId:id,entries:{},start:session?null:drafts.start};state.sets=[];state.selectedExercise="";writeDrafts();}
+  }
+  function saveExerciseDraft(){
+    if(!state.data?.active_session||!state.selectedExercise)return;
+    drafts.selected={category:state.cardio?"Кардио":state.category,exercise:state.selectedExercise};
+    drafts.entries[draftEntryKey()]={sets:state.sets.map(s=>({...s})),duration:$("#duration")?.value||"",distance:$("#distance")?.value||""};
+    writeDrafts();
+  }
+  function previousExercise(){
+    const current=state.data.active_session;if(!current||state.cardio)return null;
+    const cleanName=value=>String(value||"").replace(/^(Грудь|Ноги|Спина|Другое|Кардио):\s*/,"").trim();
+    const start=`${current.date}T${current.session_start||"00:00"}`;
+    const candidates=(state.data.history||[]).filter(item=>String(item.session_id)!==String(current.id)&&!String(item.exercise).startsWith("Кардио:")&&cleanName(item.exercise)===state.selectedExercise&&`${item.date}T${item.session_start||"00:00"}`<start)
+      .sort((a,b)=>b.date.localeCompare(a.date)||String(b.session_start||"").localeCompare(String(a.session_start||""))||b.id-a.id);
+    for(const item of candidates){
+      const sets=item.sets?.length?item.sets:Array.from({length:Math.min(100,Number(item.set_count)||0)},()=>({weight:item.weight,reps:item.reps}));
+      if(sets.length&&sets.every(s=>s.weight!=null&&s.reps!=null&&Number.isFinite(Number(s.weight))&&Number(s.weight)>=0&&Number(s.weight)<=10000&&Number.isInteger(Number(s.reps))&&Number(s.reps)>0&&Number(s.reps)<=10000))return {...item,sets:sets.slice(0,100)};
+    }
+    return null;
+  }
   function renderSessionStart(){
     const profile=state.data.profile||{};
     $("#title").textContent="Запись";$("#subtitle").textContent="Начни занятие и добавляй упражнения по ходу";
-    screen.innerHTML=`<div id="message" class="notice"></div><div class="card session-start-card"><div class="section-title">Начать новую тренировку</div>
+    screen.innerHTML=`<div id="message" class="notice"></div><div class="training-intro"><div class="intro-label">В своём ритме</div><h2>Время стать<br>сильнее.</h2><p>Каждая тренировка — шаг вперёд.</p><div class="intro-art">${icon("record")}</div></div><div class="card session-start-card"><div class="section-title">${icon("calendar")} Новая тренировка</div><div class="start-fields">
       <div class="field"><label>Дата тренировки</label><input type="date" id="workout_date" value="${localDate(new Date())}" required></div>
       <div class="field"><label>Время начала</label><input type="time" id="session_start" value="${fmtTime(new Date())}" required></div>
-      <div class="field"><label>Вес тела · кг</label><input type="number" id="body_weight" inputmode="decimal" min="0.1" max="1000" step="0.1" value="${esc(profile.body_weight||"")}" placeholder="Например, 78" required></div>
+      </div><div class="field"><label>Вес тела · кг</label><input type="number" id="body_weight" inputmode="decimal" min="0.1" max="1000" step="0.1" value="${esc(profile.body_weight||"")}" placeholder="Например, 78" required></div>
       <div class="field"><label>Программа тренировок · необязательно</label><select id="session_program"><option value="">Без программы</option>${(state.data.programs||[]).map(p=>`<option value="${esc(p.id)}" ${String(p.id)===state.newProgramId?"selected":""}>${esc(p.name)}</option>`).join("")}</select></div>
-      <button class="primary" id="startSession">Начать тренировку</button></div>`;
+      <button class="primary" id="startSession">Начать тренировку</button><p class="draft-status" id="draftStatus" role="status"></p></div>`;
+    const startFields=["workout_date","session_start","body_weight","session_program"];
+    if(drafts.start)startFields.forEach(id=>{if(drafts.start[id]!=null&&!(id==="session_program"&&state.newProgramId))$("#"+id).value=drafts.start[id];});
+    startFields.forEach(id=>$("#"+id).addEventListener("input",()=>{drafts.start=Object.fromEntries(startFields.map(key=>[key,$("#"+key).value]));writeDrafts();}));
+    draftStatus();
     $("#startSession").onclick=async()=>{const button=$("#startSession");try{
       if(!$("#workout_date").value||!$("#session_start").value||!$("#body_weight").value)throw new Error("Укажи дату, время начала и вес тела.");
       button.disabled=true;const programId=$("#session_program").value;const result=await api("/api/sessions",{method:"POST",body:JSON.stringify({date:$("#workout_date").value,session_start:$("#session_start").value,body_weight:$("#body_weight").value,program_id:programId})});
@@ -80,6 +154,7 @@
     return `<div class="card"><div class="session-summary"><div><div class="eyebrow">ТЕКУЩАЯ ТРЕНИРОВКА${s.program_name?` · ${esc(s.program_name)}`:""}</div><strong>${esc(day)}</strong><small>Начало ${esc(s.session_start)} · вес тела ${esc(s.body_weight)} кг</small></div><button class="secondary" id="editSession">Изменить</button></div></div>`;
   }
   function renderRecord() {
+    syncDraftSession();
     if(!state.data.active_session){renderSessionStart();return;}
     $("#title").textContent="Текущая тренировка";
     $("#subtitle").textContent="Добавляй упражнения, затем укажи время окончания";
@@ -91,8 +166,8 @@
       <div class="card"><div class="section-title">Упражнение</div>
         <div class="segments">${categories.map(c=>`<button class="segment ${((c==="Кардио")===state.cardio && (state.cardio||c===state.category))?"active":""}" data-category="${esc(c)}">${esc(c)}</button>`).join("")}</div>
         <div class="field"><label>${state.cardio?"Кардиоупражнение":"Выбери движение"}</label><div class="exercise-line"><select id="exercise" required>${(state.data.exercises[state.cardio?"Кардио":state.category]||[]).map(x=>`<option>${esc(x)}</option>`).join("")}</select><button class="icon-add" id="addExercise" title="Добавить своё упражнение">＋</button></div></div>
-        ${state.cardio?`<div class="row"><div class="field"><label>Длительность · мин</label><input type="number" id="duration" inputmode="decimal" min="1" step="1" placeholder="35" required></div><div class="field"><label>Дистанция · км</label><input type="number" id="distance" inputmode="decimal" min="0" step="0.01" placeholder="Необязательно"></div></div><button class="primary" id="save">Добавить кардио</button>`:`<div class="set-head"><span>№</span><span>Вес · кг</span><span>Повторы</span><span></span></div><div id="setList"></div><button class="link-btn" id="addSet">＋ Добавить подход</button><button class="primary" id="save">Добавить упражнение</button>`}
-      </div><div class="card"><div class="section-title">Добавлено в эту тренировку</div><div class="current-list">${current.length?current.map(historyCard).join(""):'<div class="help">Пока нет упражнений.</div>'}</div><div class="session-actions"><button class="primary" id="finishSession">Завершить тренировку</button></div></div>`;
+        ${state.cardio?`<div class="row"><div class="field"><label>Длительность · мин</label><input type="number" id="duration" inputmode="decimal" min="1" step="1" placeholder="35" required></div><div class="field"><label>Дистанция · км</label><input type="number" id="distance" inputmode="decimal" min="0" step="0.01" placeholder="Необязательно"></div></div><button class="primary" id="save">Добавить кардио</button>`:`<div class="set-head"><span>№</span><span>Вес · кг</span><span>Повторы</span></div><div id="setList"></div><button class="link-btn" id="addSet">＋ Добавить подход</button><button class="primary" id="save">Добавить упражнение</button>`}
+      <p class="draft-status" id="draftStatus" role="status"></p></div><div class="card"><div class="section-title">Добавлено в эту тренировку</div><div class="current-list">${current.length?current.map(historyCard).join(""):'<div class="help">Пока нет упражнений.</div>'}</div><div class="session-actions"><button class="primary" id="finishSession">Завершить тренировку</button></div></div>`;
     $("#editSession").onclick=()=>openSessionEditor(false);
     $("#finishSession").onclick=()=>openSessionEditor(true);
     screen.querySelectorAll("[data-template]").forEach(button=>button.onclick=()=>{
@@ -103,30 +178,45 @@
     screen.querySelectorAll("[data-edit]").forEach(btn=>btn.onclick=()=>openWorkoutEditor(state.data.history.find(x=>x.id===Number(btn.dataset.edit))));
     screen.querySelectorAll("[data-delete]").forEach(btn=>btn.onclick=()=>deleteWorkout(Number(btn.dataset.delete)));
     const exercise=$("#exercise");
-    if (state.cardio) exercise.value=state.data.exercises.Кардио?.[0]||"";
-    else if (state.selectedExercise && (state.data.exercises[state.category]||[]).includes(state.selectedExercise)) exercise.value=state.selectedExercise;
+    if (state.selectedExercise && [...exercise.options].some(o=>o.value===state.selectedExercise)) exercise.value=state.selectedExercise;
+    state.selectedExercise=exercise.value;
+    const saved=drafts.entries[draftEntryKey()];
+    state.sets=Array.isArray(saved?.sets)&&saved.sets.length?saved.sets.slice(0,100).map(s=>({weight:s?.weight??"",reps:s?.reps??"",completed:!!s?.completed})):Array.from({length:state.templateSets||3},()=>({weight:"",reps:"",completed:false}));state.templateSets=3;
+    if(state.cardio){$("#duration").value=saved?.duration||"";$("#distance").value=saved?.distance||"";["#duration","#distance"].forEach(id=>$(id).oninput=saveExerciseDraft);}
     screen.querySelectorAll("[data-category]").forEach(btn=>btn.onclick=()=>{
       const category=btn.dataset.category;
       if(category==="Кардио"){state.cardio=true;state.selectedExercise="";}
       else {state.cardio=false;state.category=category;state.selectedExercise="";}
       renderRecord();
     });
-    exercise.onchange=()=>state.selectedExercise=exercise.value;
+    exercise.onchange=()=>{state.selectedExercise=exercise.value;renderRecord();};
     $("#addExercise").onclick=async()=>{
       const name=prompt("Название упражнения"); if(!name?.trim()) return;
       try{const result=await api("/api/exercises",{method:"POST",body:JSON.stringify({category:state.cardio?"Кардио":state.category,name:name.trim()})});
         state.data.exercises[result.category]=[...(state.data.exercises[result.category]||[]),name.trim()];state.selectedExercise=name.trim();renderRecord();}
       catch(e){showMessage(e.message,true);}
     };
-    if(!state.cardio){state.sets=state.sets.length?state.sets:Array.from({length:state.templateSets||3},()=>({weight:"",reps:"",completed:false}));state.templateSets=3;renderSets();$("#addSet").onclick=()=>{if(state.sets.length>=100)return showMessage("Максимум 100 подходов.",true);state.sets.push({weight:"",reps:"",completed:false});renderSets();};}
+    if(!state.cardio){
+      const previous=previousExercise();
+      const previousBox=document.createElement("div");previousBox.className="previous-result";
+      previousBox.innerHTML=previous?`<div><strong>Прошлая тренировка</strong><small>${esc(new Date(previous.date+"T12:00:00").toLocaleDateString("ru-RU",{day:"numeric",month:"long"}))} · ${previous.sets.length} ${plural(previous.sets.length,["подход","подхода","подходов"])}</small></div><button class="secondary" id="repeatPrevious">Повторить прошлые веса</button>`:'<span class="help">Для этого упражнения пока нет прошлых результатов.</span>';
+      $(".set-head").before(previousBox);
+      if(previous)$("#repeatPrevious").onclick=()=>{
+        if(state.sets.some(s=>s.weight!==""||s.reps!=="")&&!confirm("Заменить введённые подходы весами и повторами из прошлой тренировки?"))return;
+        state.sets=previous.sets.map(s=>({weight:String(s.weight),reps:String(s.reps),completed:false}));saveExerciseDraft();renderSets();
+      };
+      renderSets();$("#addSet").onclick=()=>{if(state.sets.length>=100)return showMessage("Максимум 100 подходов.",true);state.sets.push({weight:"",reps:"",completed:false});saveExerciseDraft();renderSets();};
+    }
+    saveExerciseDraft();
     $("#save").onclick=saveWorkout;
   }
   function renderSets(){
     const list=$("#setList");if(!list)return;
-    list.innerHTML=state.sets.map((set,i)=>`<div class="set-row"><span class="set-num">${String(i+1).padStart(2,"0")}</span><input aria-label="Вес подхода ${i+1}" data-weight="${i}" type="number" inputmode="decimal" min="0" max="10000" step="0.1" value="${esc(set.weight)}" placeholder="кг"><input aria-label="Повторы подхода ${i+1}" data-reps="${i}" type="number" inputmode="numeric" min="1" max="10000" step="1" value="${esc(set.reps)}" placeholder="раз"><button class="check ${set.completed?"done":""}" data-check="${i}">${set.completed?"✓":"○"}</button></div>`).join("");
-    list.querySelectorAll("[data-weight]").forEach(el=>el.oninput=()=>state.sets[Number(el.dataset.weight)].weight=el.value);
-    list.querySelectorAll("[data-reps]").forEach(el=>el.oninput=()=>state.sets[Number(el.dataset.reps)].reps=el.value);
-    list.querySelectorAll("[data-check]").forEach(el=>el.onclick=()=>{const i=Number(el.dataset.check);state.sets[i].completed=!state.sets[i].completed;renderSets();});
+    list.innerHTML=state.sets.map((set,i)=>`<div class="set-row"><span class="set-num">${String(i+1).padStart(2,"0")}</span><input aria-label="Вес подхода ${i+1}" data-weight="${i}" type="number" inputmode="decimal" min="0" max="10000" step="0.1" value="${esc(set.weight)}" placeholder="кг"><input aria-label="Повторы подхода ${i+1}" data-reps="${i}" type="number" inputmode="numeric" min="1" max="10000" step="1" value="${esc(set.reps)}" placeholder="раз"></div>`).join("");
+    const previous=previousExercise();
+    list.querySelectorAll(".set-row").forEach((row,i)=>{const hint=document.createElement("div");hint.className="previous-set";const old=previous?.sets[i];hint.textContent=old?`В прошлый раз: ${Number(old.weight).toLocaleString("ru-RU")} кг × ${old.reps}`:"В прошлый раз: нет данных для этого подхода";row.append(hint);});
+    list.querySelectorAll("[data-weight]").forEach(el=>el.oninput=()=>{state.sets[Number(el.dataset.weight)].weight=el.value;saveExerciseDraft();});
+    list.querySelectorAll("[data-reps]").forEach(el=>el.oninput=()=>{state.sets[Number(el.dataset.reps)].reps=el.value;saveExerciseDraft();});
   }
   function showMessage(text,error=false){const el=$("#message");if(!el)return;el.className=`notice ${error?"error":"success"}`;el.textContent=text;}
   async function saveWorkout(){
@@ -135,8 +225,10 @@
       const common={session_id:state.data.active_session.id,exercise:$("#exercise").value,category:state.cardio?"Кардио":state.category};
       if(state.cardio){common.duration_minutes=$("#duration").value;common.distance_km=$("#distance").value;}
       else {common.sets=state.sets.map(s=>({weight:s.weight,reps:s.reps,completed:s.completed}));}
-      button.disabled=true;await api("/api/workouts",{method:"POST",body:JSON.stringify(common)});
-      state.sets=[];state.data=await api("/api/bootstrap");renderRecord();showMessage("Упражнение добавлено в тренировку.");
+      const savedKey=draftEntryKey(),savedDraft=JSON.stringify(drafts.entries[savedKey]);
+      button.disabled=true;const result=await api("/api/workouts",{method:"POST",body:JSON.stringify(common)});
+      if(JSON.stringify(drafts.entries[savedKey])===savedDraft){delete drafts.entries[savedKey];writeDrafts();}
+      state.sets=[];state.data.history=result.history;renderRecord();showMessage("Упражнение добавлено в тренировку.");
       if(tg?.HapticFeedback)tg.HapticFeedback.notificationOccurred("success");
     }catch(e){showMessage(e.message,true);if(button)button.disabled=false;}
   }
@@ -272,8 +364,14 @@
     $("#saveGoals").onclick=async()=>{try{const result=await api("/api/goals",{method:"POST",body:JSON.stringify({target_weight:$("#goal_weight").value,target_workouts:$("#goal_workouts").value,target_exercise:$("#goal_exercise").value,target_record:$("#goal_record").value})});state.data.goals=result.goals;renderMore();}catch(e){showMessage(e.message,true);}};
   }
   const moreDrawer=$("#moreDrawer");
-  function closeMoreDrawer(){moreDrawer.classList.remove("open");}
-  function openMoreDrawer(){moreDrawer.classList.add("open");}
+  const drawerPanel=moreDrawer.querySelector(".more-drawer");
+  drawerPanel.setAttribute("role","dialog");drawerPanel.setAttribute("aria-modal","true");drawerPanel.setAttribute("aria-label","Ещё");
+  const drawerClose=document.createElement("button");drawerClose.className="icon-btn drawer-close";drawerClose.textContent="×";drawerClose.setAttribute("aria-label","Закрыть меню");drawerPanel.querySelector(".more-drawer-title").prepend(drawerClose);
+  moreDrawer.inert=true;
+  function closeMoreDrawer(){moreDrawer.classList.remove("open");moreDrawer.inert=true;document.body.style.overflow="";document.querySelector('[data-tab="more"]').focus();}
+  function openMoreDrawer(){moreDrawer.inert=false;moreDrawer.classList.add("open");document.body.style.overflow="hidden";drawerClose.focus();}
+  drawerClose.onclick=closeMoreDrawer;
+  moreDrawer.addEventListener("keydown",e=>{if(e.key==="Escape")closeMoreDrawer();if(e.key==="Tab"){const buttons=[...moreDrawer.querySelectorAll("button")];if(e.shiftKey&&document.activeElement===buttons[0]){e.preventDefault();buttons.at(-1).focus();}else if(!e.shiftKey&&document.activeElement===buttons.at(-1)){e.preventDefault();buttons[0].focus();}}});
   moreDrawer.onclick=e=>{if(e.target===moreDrawer)closeMoreDrawer();};
   moreDrawer.querySelectorAll("[data-more-anchor]").forEach(button=>button.onclick=async()=>{state.moreSection=button.dataset.moreAnchor;state.tab="more";closeMoreDrawer();try{state.data=await api("/api/bootstrap");}catch(e){screen.innerHTML=`<div class="card empty">${esc(e.message)}</div>`;return;}render();});
   function render(){document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("active",b.dataset.tab===state.tab));if(state.tab==="record")renderRecord();else if(state.tab==="history")renderHistory();else if(state.tab==="programs")renderPrograms();else if(state.tab==="more")renderMore();else renderProfile();}
@@ -281,6 +379,7 @@
   async function start(){
     try{state.meta=await api("/api/meta");if(!state.meta.configured)throw new Error("Сервер Mini App пока не настроен.");
       state.data=await api("/api/bootstrap");
+      loadDrafts();
       if(!state.data.profile?.name)state.tab="profile";
       render();
     }catch(error){screen.innerHTML=`<div class="card"><div class="section-title">Не удалось открыть дневник</div><div class="help">${esc(error.message)}${!tg&&!localDev?" Открой приложение через Telegram.":""}</div></div>`;}

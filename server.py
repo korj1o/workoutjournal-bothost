@@ -712,7 +712,7 @@ class Handler(BaseHTTPRequestHandler):
             return self.send_error(404)
         if not file_path.is_file():
             return self.send_error(404)
-        content_type = "text/html; charset=utf-8" if file_path.suffix == ".html" else "application/octet-stream"
+        content_type = {".html": "text/html; charset=utf-8", ".css": "text/css; charset=utf-8"}.get(file_path.suffix, "application/octet-stream")
         data = file_path.read_bytes()
         self.send_response(200)
         self.send_header("Content-Type", content_type)
